@@ -19,3 +19,14 @@ import LHCXSHiggsCouplings
 LHCXSHiggsCouplings.kH2(0.2,0.2,0.2,0.2)
 ```
 in python and get back `0.039985238812654623`.
+
+
+As a cheap unit test, add this to main:
+
+```
+# these should all be one
+print( kGamma2(1,1,1,1) )
+print( kHGluGlu2(1,1) )
+print( kHZGamma2(1,1,1,1) )
+print( kH2(1,1,1,1) )
+```

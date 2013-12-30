@@ -148,13 +148,13 @@ output/atlas_counting/lvl%_wideGauss/muTmuW.root: output/atlas_counting/lvl%_wid
 
 # no box
 output/atlas_counting/2p%/table_etas.pickle: output/atlas_counting/2p%.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.0,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_eff --skip_fullScan
+	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.0,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
 
 output/atlas_counting/4%/table_etas.pickle: output/atlas_counting/4%.root
-	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_eff --skip_fullScan
+	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS)
 
 output/atlas_counting/lvl%/table_etas.pickle: output/atlas_counting/lvl%.root
-	python Decouple/decouple.py -i $< --range=0.0,-0.8,1.7,4.5 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_eff --skip_fullScan
+	python Decouple/decouple.py -i $< --range=0.0,-0.8,1.7,4.5 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
 
 
 decoupleAtlasCountingInterpCode0Box: \
