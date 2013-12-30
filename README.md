@@ -1,3 +1,8 @@
+# Decouple and Recouple
+
+This repository contains the software implementation for our paper __A Novel Approach to Higgs Coupling Measurements__ (Cranmer, Kreiss, Lopez-Val, Plehn), arXiv:XXXX.XXXX. It contains tools to apply the discussed methods to new models and contains a Makefile to recreate the plots in the paper.
+
+
 # Prerequisites
 
 You need the right root version. There are a few features that are not in main root yet:
