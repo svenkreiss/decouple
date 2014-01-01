@@ -11,7 +11,7 @@ From inside the LHCXSHiggsCouplings directory:
 svn co https://svn.cern.ch/reps/lhchiggsxs/repository/Higgs-coupling/data Higgs-coupling-data
 ```
 
-### Yellow Report 3 data in somewhere else
+### Yellow Report 3 data somewhere else
 To download the data into the subdirectory `Higgs-coupling-data` under the current directory and set the environment variable to tell this module where the data is:
 
 ```
