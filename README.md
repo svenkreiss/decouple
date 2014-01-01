@@ -21,7 +21,7 @@ git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
 NOTE: currently, you need the special branch `hfBugs` that fixes the copy constructors in HistFactory.
 
 **Higgs Coupling numbers from Yellow Report 3**:
-The module `LHCXSHiggsCouplings` (included in this repository) is required to run the benchmark coupling models. Please see the [README.md](Decouple/src/LHCXSHiggsCouplings/README.md). To get started quickly, run from the root repository directory:
+The module `LHCXSHiggsCouplings` (included in this repository) is required to run the benchmark coupling models. Please see the [README file](Decouple/src/LHCXSHiggsCouplings/README.md). To get started quickly, just run from the root repository directory:
 
 ```
 svn co https://svn.cern.ch/reps/lhchiggsxs/repository/Higgs-coupling/data Decouple/src/LHCXSHiggsCouplings/Higgs-coupling-data
@@ -32,7 +32,7 @@ svn co https://svn.cern.ch/reps/lhchiggsxs/repository/Higgs-coupling/data Decoup
 
 You can create your own model and run `decouple.py` and `recouple.py` on them. `decouple.py` takes root files with a RooWorkspace, containing the model as input and produces the effective Likelihood and eta files. `recouple.py` takes eta files and effective Likelihoods (also from multiple channels to do a combination) and produces coupling results.
 
-Example models are in the module ModelGenerators with a [README file](ModelGenerators/README.md) containing more notes also on official ATLAS models and how to make them and submit to HepData.
+Example models are in the module ModelGenerators ([README file](ModelGenerators/README.md)).
 
 
 # Creating plots for the note
