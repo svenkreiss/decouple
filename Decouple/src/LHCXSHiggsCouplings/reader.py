@@ -11,15 +11,13 @@ import os,csv
 
 cache_YR3 = {}
 
-def readYR3( filename, mH, verbose=False ):
-	""" Read text files that are formatted like the data files for YR3. """
-	if filename+"_"+str(mH) in cache_YR3.keys():
-		return cache_YR3[filename+"_"+str(mH)]
 
+def readFile( fileHandle ):
+	""" Read text files that are formatted like the data files for YR3. """
 	header = None
 	values = []
-	f = open(os.environ['HIGGSCOUPLINGDATA']+'/'+filename, 'r')
-	for line in f:
+	
+	for line in fileHandle:
 		line = line.replace('\t', ' ')
 		while('  ' in line): line = line.replace('  ',' ')
 		line = line.strip()
@@ -28,6 +26,22 @@ def readYR3( filename, mH, verbose=False ):
 
 		if not header: header = line
 		else: values.append( [ float(r) for r in line ] )
+
+	return (header,values)
+
+def readYR3( filename, mH, verbose=False ):
+	""" Use YR3 data and interpolate numbers between Higgs masses. """
+	if filename+"_"+str(mH) in cache_YR3.keys():
+		return cache_YR3[filename+"_"+str(mH)]
+
+	header,values = (None,[])
+	try:
+		currentPath = os.path.dirname(os.path.realpath(__file__))
+		with open(currentPath+'/Higgs-coupling-data/'+filename, 'r') as f:
+			header,values = readFile(f)
+	except IOError:
+		with open(os.environ['HIGGSCOUPLINGDATA']+'/'+filename, 'r') as f:
+			header,values = readFile(f)
 
 	values = numpy.array( values )
 	interpValues = [ numpy.interp(mH,values[:,0],values[:,i+1]) for i in range(len(values[0])-1) ]
@@ -42,4 +56,3 @@ def readYR3( filename, mH, verbose=False ):
 		print( "" )
 
 	return result
-

@@ -21,7 +21,11 @@ git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
 NOTE: currently, you need the special branch `hfBugs` that fixes the copy constructors in HistFactory.
 
 **Higgs Coupling numbers from Yellow Report 3**:
-This package (included in this repository) is required to run the benchmark coupling models. Please see the [README.md](Decouple/src/LHCXSHiggsCouplings/README.md) of the module `LHCXSHiggsCouplings`.
+The module `LHCXSHiggsCouplings` (included in this repository) is required to run the benchmark coupling models. Please see the [README.md](Decouple/src/LHCXSHiggsCouplings/README.md). To get started quickly, run from the root repository directory:
+
+```
+svn co https://svn.cern.ch/reps/lhchiggsxs/repository/Higgs-coupling/data Decouple/src/LHCXSHiggsCouplings/Higgs-coupling-data
+```
 
 
 # Running on any model

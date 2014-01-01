@@ -142,11 +142,6 @@ def kH2_GamGlu( kGam,kGlu, mH=125.5 ):
 #########################################################################
 
 
-
-def test_filePresence():
-	with open('sm/br/BR.txt'):
-		pass
-
 def test_sm_kGlu2_7TeV():
 	import nose
 	nose.tools.assert_almost_equal( kGlu2_7TeV(1,1), 1.0, places=6 )
@@ -158,5 +153,22 @@ def test_sm_kGlu2_8TeV():
 def test_sm_kHGluGlu2():
 	import nose
 	nose.tools.assert_almost_equal( kHGluGlu2(1,1), 1.0, places=6 )
+
+
+def test_sm_kGamma2():
+	import nose
+	nose.tools.assert_almost_equal( kGamma2(1,1,1,1), 1.0, places=4 )
+
+def test_sm_kHGluGlu2():
+	import nose
+	nose.tools.assert_almost_equal( kHGluGlu2(1,1), 1.0, places=6 )
+
+def test_sm_kHZGamma2():
+	import nose
+	nose.tools.assert_almost_equal( kHZGamma2(1,1,1,1), 1.0, places=6 )
+
+def test_sm_kH2():
+	import nose
+	nose.tools.assert_almost_equal( kH2(1,1,1,1), 1.0, places=3 )
 
 
