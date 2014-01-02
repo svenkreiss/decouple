@@ -2,6 +2,8 @@
 
 This repository contains the software implementation for our paper __A Novel Approach to Higgs Coupling Measurements__ (Cranmer, Kreiss, Lopez-Val, Plehn), arXiv:XXXX.XXXX. It contains tools to apply the discussed methods to new models and contains a Makefile to recreate the plots in the paper.
 
+A demo for the recoupling stage where the effective likelihood and template parametrization are readily provided is at [decoupledDemo](http://github.com/svenkreiss/decoupledDemo).
+
 
 # Prerequisites
 
@@ -41,7 +43,7 @@ You can create your own model and run `decouple.py` and `recouple.py` on them. `
 
 Example models are in the module ModelGenerators ([README file](ModelGenerators/README.md)).
 
-A fully working example that _recouples_ a model that someone else decoupled is implemented in the [decoupledBoilerplate](http://github.com/svenkreiss/decoupledBoilerplate) project.
+A fully working example that _recouples_ a model that someone else decoupled is implemented in the [decoupledDemo](http://github.com/svenkreiss/decoupledDemo) project.
 
 
 # Creating plots for the paper
