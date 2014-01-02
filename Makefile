@@ -224,6 +224,19 @@ output/twoBin/%/muTmuW_profiledContour_template24_etasgeneric24_learning.root: o
 	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic24_learning:2   --template=24 --skip_kVkF --skip_kGlukGamma
 
 
+output/twoBin/%/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root: output/twoBin/%/muTmuW_eff.root
+	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic10_learningFull:2   --template=10 --skip_kVkF --skip_kGlukGamma
+
+output/twoBin/%/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root: output/twoBin/%/muTmuW_eff.root
+	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic14_learningFull:2   --template=14 --skip_kVkF --skip_kGlukGamma
+
+output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root: output/twoBin/%/muTmuW_eff.root
+	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learningFull:2   --template=20 --skip_kVkF --skip_kGlukGamma
+
+output/twoBin/%/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root: output/twoBin/%/muTmuW_eff.root
+	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic24_learningFull:2   --template=24 --skip_kVkF --skip_kGlukGamma
+
+
 
 
 # box full scan reference
@@ -239,6 +252,9 @@ output/twoBin/%/muTmuW_profiledContour_template10_etasgeneric_M5_box1.0.root: ou
 
 output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root: output/twoBin/%/muTmuW_eff.root
 	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learning:2   --template=20 --skip_kVkF --skip_kGlukGamma --box=1
+
+output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root: output/twoBin/%/muTmuW_eff.root
+	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learningFull:2   --template=20 --skip_kVkF --skip_kGlukGamma --box=1
 
 
 
@@ -295,6 +311,35 @@ recoupleTwoBinLearningInterpCode0: \
 		output/twoBin/scenarioC2_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root \
 		output/twoBin/scenarioD_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root
 
+recoupleTwoBinLearningFullInterpCode0: \
+		output/twoBin/scenarioA_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioA2_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioB_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioC_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioC2_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioD_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		\
+		output/twoBin/scenarioA_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioA2_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioB_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioC_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioC2_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioD_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		\
+		output/twoBin/scenarioA_interpCode0_box/muTmuW.root \
+		output/twoBin/scenarioA2_interpCode0_box/muTmuW.root \
+		output/twoBin/scenarioB_interpCode0_box/muTmuW.root \
+		output/twoBin/scenarioC_interpCode0_box/muTmuW.root \
+		output/twoBin/scenarioC2_interpCode0_box/muTmuW.root \
+		output/twoBin/scenarioD_interpCode0_box/muTmuW.root \
+		\
+		output/twoBin/scenarioA_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioA2_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioB_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioC_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioC2_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioD_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root
+
 recoupleTwoBinLearning: \
 		output/twoBin/scenarioA/muTmuW_profiledContour_template10_etasgeneric10_learning.root \
 		output/twoBin/scenarioA2/muTmuW_profiledContour_template10_etasgeneric10_learning.root \
@@ -348,6 +393,60 @@ recoupleTwoBinLearning: \
 		output/twoBin/scenarioC/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root \
 		output/twoBin/scenarioC2/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root \
 		output/twoBin/scenarioD/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root
+
+recoupleTwoBinLearningFull: \
+		output/twoBin/scenarioA/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioA2/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioB/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioC/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioC2/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/scenarioD/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		\
+		output/twoBin/scenarioA/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/scenarioA2/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/scenarioB/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/scenarioC/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/scenarioC2/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/scenarioD/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		\
+		output/twoBin/scenarioA/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioA2/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioB/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioC/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioC2/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/scenarioD/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		\
+		output/twoBin/scenarioA/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		output/twoBin/scenarioA2/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		output/twoBin/scenarioB/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		output/twoBin/scenarioC/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		output/twoBin/scenarioC2/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		output/twoBin/scenarioD/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		\
+		\
+		output/twoBin/twoAlpha_catNonUniversal/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/twoAlpha_catNonUniversal/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/twoAlpha_catNonUniversal/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/twoAlpha_catNonUniversal/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		\
+		output/twoBin/twoAlpha_catNonUniversal_interpCode0/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root \
+		output/twoBin/twoAlpha_catNonUniversal_interpCode0/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root \
+		output/twoBin/twoAlpha_catNonUniversal_interpCode0/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root \
+		output/twoBin/twoAlpha_catNonUniversal_interpCode0/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root \
+		\
+		output/twoBin/scenarioA_box/muTmuW.root \
+		output/twoBin/scenarioA2_box/muTmuW.root \
+		output/twoBin/scenarioB_box/muTmuW.root \
+		output/twoBin/scenarioC_box/muTmuW.root \
+		output/twoBin/scenarioC2_box/muTmuW.root \
+		output/twoBin/scenarioD_box/muTmuW.root \
+		\
+		output/twoBin/scenarioA/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioA2/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioB/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioC/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioC2/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root \
+		output/twoBin/scenarioD/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root
 
 recoupleTwoBinInterpCode0: \
 		output/twoBin/scenarioA_interpCode0/muTmuW_profiledContour.root \
@@ -406,7 +505,7 @@ recoupleTwoBinInterpCode0: \
 		output/twoBin/scenarioC2_interpCode0/muTmuW_profiledContour_template0_etasfisherInfo_box1.0.root \
 		output/twoBin/scenarioD_interpCode0/muTmuW_profiledContour_template0_etasfisherInfo_box1.0.root \
 		\
-		recoupleTwoBinLearningInterpCode0
+		recoupleTwoBinLearningFullInterpCode0
 
 recoupleTwoBin: \
 		output/twoBin/oneAlpha_catUniversal/muTmuW_profiledContour.root \
@@ -475,7 +574,7 @@ recoupleTwoBin: \
 		output/twoBin/scenarioC2/muTmuW_profiledContour_template0_etasfisherInfo_box1.0.root \
 		output/twoBin/scenarioD/muTmuW_profiledContour_template0_etasfisherInfo_box1.0.root \
 		\
-		recoupleTwoBinLearning
+		recoupleTwoBinLearningFull
 
 
 OPTIONS_2PH = --options_muTmuW='--range=0.6,0.5,2.6,3.6 --bins=250,250' --skip_kVkF --skip_kGlukGamma

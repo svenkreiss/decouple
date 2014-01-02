@@ -20,6 +20,13 @@ git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
 
 NOTE: currently, you need the special branch `hfBugs` that fixes the copy constructors in HistFactory.
 
+You need to add the following to your PYTHONPATH environment variable:
+
+```
+export PYTHONPATH=$ROOTSYS/tutorials/roostats/py:/Path/to/your/decouple:$PYTHONPATH
+```
+
+
 **Higgs Coupling numbers from Yellow Report 3**:
 The module `LHCXSHiggsCouplings` (included in this repository) is required to run the benchmark coupling models. Please see the [README file](Decouple/src/LHCXSHiggsCouplings/README.md). To get started quickly, just run from the root repository directory:
 
@@ -34,8 +41,10 @@ You can create your own model and run `decouple.py` and `recouple.py` on them. `
 
 Example models are in the module ModelGenerators ([README file](ModelGenerators/README.md)).
 
+A fully working example that _recouples_ a model that someone else decoupled is implemented in the [decoupledBoilerplate](http://github.com/svenkreiss/decoupledBoilerplate) project.
 
-# Creating plots for the note
+
+# Creating plots for the paper
 
 Run everything with
 

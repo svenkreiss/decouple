@@ -42,13 +42,15 @@ import os
 
 
 def main():
+	currentPath = os.path.dirname(os.path.realpath(__file__))
+
 	print( "Creating output directory." )
 	os.system( "mkdir -p "+options.output )
 
 	# muTmuW: profiled
 	if not options.skip_muTmuW:
 		print("\n\n----- muTmuW scan -----\n")
-		r = os.system( 'time python Decouple/src/muTmuW.py \
+		r = os.system( 'time python '+currentPath+'/src/muTmuW.py \
 			-i "'+options.input+'" \
 			'+options.options_muTmuW+' \
 			'+src.effectiveModel.optionsString(options)+' \
@@ -60,7 +62,7 @@ def main():
 	# kVkF: profiled
 	if not options.skip_kVkF:
 		print("\n\n----- kVkF scan -----\n")
-		r = os.system( 'time python Decouple/src/kVkF.py \
+		r = os.system( 'time python '+currentPath+'/src/kVkF.py \
 			-i "'+options.input+'" \
 			'+options.options_kVkF+' \
 			'+src.effectiveModel.optionsString(options)+' \
@@ -72,7 +74,7 @@ def main():
 	# kGlukGamma: profiled
 	if not options.skip_kGlukGamma:
 		print("\n\n----- kGlukGamma scan -----\n")
-		r = os.system( 'time python Decouple/src/kGlukGamma.py \
+		r = os.system( 'time python '+currentPath+'/src/kGlukGamma.py \
 			-i "'+options.input+'" \
 			'+options.options_kGlukGamma+' \
 			'+src.effectiveModel.optionsString(options)+' \

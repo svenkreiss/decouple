@@ -43,6 +43,8 @@ import os
 
 
 def main():
+	currentPath = os.path.dirname(os.path.realpath(__file__))
+
 	print( "Creating output directory." )
 	os.system( "mkdir -p "+options.output )
 
@@ -121,7 +123,7 @@ def main():
 
 	# obtain etas
 	if not options.skip_etas:
-		r = os.system( 'python Decouple/src/obtainEtas.py -q -i '+options.input+' -o '+options.output+' '+wsMcData+' -p '+options.parameters )
+		r = os.system( 'python '+currentPath+'/src/obtainEtas.py -q -i '+options.input+' -o '+options.output+' '+wsMcData+' -p '+options.parameters )
 		if r != 0: raise
 
 

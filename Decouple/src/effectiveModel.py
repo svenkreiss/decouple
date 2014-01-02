@@ -19,6 +19,7 @@ import re, pickle
 import numpy
 
 from multiprocessing import Pool
+from progressbar import ProgressBar
 
 
 def addOptionsToParser( parser ):
@@ -732,7 +733,13 @@ def fillHist(h,x,y, inputs, options, npHistograms=None):
 				paramPoints.append( (xVal,yVal) )
 
 		p = Pool()
-		for x,y,value,nps in p.imap_unordered(_fill, [(x,y,inputs,options) for x,y in paramPoints], len(paramPoints)/100):
+		progress = ProgressBar(maxval=len(paramPoints))
+		progress.start()
+		for i,values in enumerate(p.imap_unordered(_fill, [(x,y,inputs,options) for x,y in paramPoints], len(paramPoints)/100)):
+			# print( 'progress: %0.1f%%' % (100.0*i/(len(paramPoints))) )
+			progress.update(i)
+
+			x,y,value,nps = values
 			bin = h.FindBin( x,y )
 			h.SetBinContent( bin,value )
 
@@ -744,4 +751,6 @@ def fillHist(h,x,y, inputs, options, npHistograms=None):
 						npHistograms[npName].SetTitle( 'value of '+npName )
 						npHistograms[npName].GetZaxis().SetTitle( 'nuisance parameter value' )
 					npHistograms[npName].SetBinContent( bin, npValue )
+
+		progress.finish()
 

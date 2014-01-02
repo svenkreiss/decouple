@@ -26,7 +26,7 @@ options,args = parser.parse_args()
 options.parameters = options.parameters.split(",")
 
 import ROOT
-# ROOT.gROOT.SetBatch( True )
+if not options.verbose: ROOT.gROOT.SetBatch( True )
 
 from multiprocessing import Pool
 from pprint import pprint
@@ -1374,7 +1374,7 @@ def plotArrows( fullModel, etasDict, template=10 ):
 		mu = {'muT':x, 'muW':y}
 
 		arrows.append( Plot.etas.drawArrows( etasDict, mu, npVals, lineWidth=1.0, template=template ) )
-	canvas.SaveAs("test.png")
+	if options.verbose: canvas.SaveAs("test.png")
 
 
 def lossFull( fullModel, effHist2Nll, etasDict, etasAndPhi, offset=None, muHat=None, template=20, verbose=False ):
@@ -1459,7 +1459,7 @@ def lossFull( fullModel, effHist2Nll, etasDict, etasAndPhi, offset=None, muHat=N
 		c3.cd(2)
 		hD2.Draw("COLZ")
 		c3.Update()
-		c3.SaveAs("testLoss.png")
+		if options.verbose: c3.SaveAs("testLoss.png")
 		
 		print( loss )
 
