@@ -133,14 +133,14 @@ decoupleTwoBin: \
 # box full scan reference
 ATLASCOUNTINGPARAMETERS = alpha_QCDscale_Higgs_ggH2in,alpha_QCDscale_Higgs_ggH,alpha_ATLAS_LUMI_2012
 output/atlas_counting/2p%_box/muTmuW.root: output/atlas_counting/2p%_box.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.0,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/4%_box/muTmuW.root: output/atlas_counting/4%_box.root
 	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/lvl%_box/muTmuW.root: output/atlas_counting/lvl%_box.root
 	python Decouple/decouple.py -i $< --range=-0.5,-1.2,2.5,5.2 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 # wideGauss full scan
 output/atlas_counting/2p%_wideGauss/muTmuW.root: output/atlas_counting/2p%_wideGauss.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.0,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/4%_wideGauss/muTmuW.root: output/atlas_counting/4%_wideGauss.root
 	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/lvl%_wideGauss/muTmuW.root: output/atlas_counting/lvl%_wideGauss.root
@@ -148,7 +148,7 @@ output/atlas_counting/lvl%_wideGauss/muTmuW.root: output/atlas_counting/lvl%_wid
 
 # no box
 output/atlas_counting/2p%/table_etas.pickle: output/atlas_counting/2p%.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.0,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
+	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
 
 output/atlas_counting/4%/table_etas.pickle: output/atlas_counting/4%.root
 	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS)

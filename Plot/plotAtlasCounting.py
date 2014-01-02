@@ -16,12 +16,12 @@ import ROOT
 ROOT.gROOT.SetBatch( True )
 import glob, re, os
 from array import array
-import csv
 
 import helperStyle
 import PyROOTUtils
 
 from parameterNames import parameterNames
+from utils import getContours, getSmallestBinMarker, getInterpolatedMinimumMarker, drawContours, drawH, draw_muTmuW_frame, draw_kVkF_frame, draw_kGlukGamma_frame
 
 
 
@@ -59,7 +59,6 @@ graySolid.SetLineWidth( 2 )
 container = []
 openFiles = []
 
-from plotTwoBin import getContours, getSmallestBinMarker, getInterpolatedMinimumMarker, drawContours, drawH, draw_muTmuW_frame, draw_kVkF_frame, draw_kGlukGamma_frame
 
 
 def countingMuTMuW( opts ):
@@ -369,232 +368,38 @@ def counting_kGlukGamma( opts ):
 
 
 
-def drawCountingVsFullMuTmuW( inFile, inFileC, outFile ):
-	canvas = ROOT.TCanvas( "canvas","canvas",800,600 )
-	axes = canvas.DrawFrame( 0.1,-2,2.8,8 )
-	axes.GetXaxis().SetTitle( "#mu^{f}_{ggF+ttH}" )
-	axes.GetYaxis().SetTitle( "#mu^{f}_{VBF+VH}" )
-	axes.GetYaxis().SetTitleOffset( 1.2 )
-
-	c68_2ph = drawContours( inFile.replace(".root","_2ph.root"), "muTmuW_2ph", color = ROOT.kRed-3, drawSmallestBinMarker=True )
-	c68_4l = drawContours( inFile.replace(".root","_4l.root"), "muTmuW_4l", color = ROOT.kBlue, drawSmallestBinMarker=True )
-	c68_lvlv = drawContours( inFile.replace(".root","_lvlv.root"), "muTmuW_lvlv", color = ROOT.kGreen-2, drawSmallestBinMarker=True )
-
-	c68_2ph_f = drawContours( inFileC.replace(".root","_2ph.root"), "profiledNLL", lineStyle=ROOT.kDashed, color = ROOT.kRed-3, scale=2.0, drawSmallestBinMarker=True )
-	c68_4l_f = drawContours( inFileC.replace(".root","_4l.root"), "profiledNLL", lineStyle=ROOT.kDashed, color = ROOT.kBlue, scale=2.0, drawSmallestBinMarker=True )
-	c68_lvlv_f = drawContours( inFileC.replace(".root","_lvlv.root"), "profiledNLL", lineStyle=ROOT.kDashed, color = ROOT.kGreen-2, scale=2.0, drawSmallestBinMarker=True )
-
-	SMMarker = ROOT.TMarker( 1.0, 1.0, 34 )
-	SMMarker.SetMarkerColor( ROOT.kBlack )
-	SMMarker.Draw()
-	blackSolid = ROOT.TLine( 1.2,1.2,1.4,1.4 )
-	blackSolid.SetLineWidth( 2 )
-	blackDashed = ROOT.TLine( 1.2,1.2,1.4,1.4 )
-	blackDashed.SetLineWidth( 2 )
-	blackDashed.SetLineStyle( ROOT.kDashed )
-
-	leg = PyROOTUtils.Legend( 0.64, 0.75, textSize=0.03 )
-	leg.AddEntry( SMMarker, "Standard Model", "P" )
-	leg.AddEntry( blackSolid, "68% CL full ATLAS model", "L" )
-	leg.AddEntry( blackDashed, "68% CL counting model", "L" )
-	leg.Draw()
-	
-	leg2 = PyROOTUtils.Legend( 0.64, 0.90, textSize = 0.03 )
-	leg2.AddEntry( c68_2ph[0],  "H #rightarrow #gamma#gamma", "L" )
-	leg2.AddEntry( c68_4l[0],   "H #rightarrow ZZ* #rightarrow 4l", "L" )
-	leg2.AddEntry( c68_lvlv[0], "H #rightarrow WW* #rightarrow l#nul#nu", "L" )
-	leg2.Draw()
-
-	#AtlasUtil.AtlasLabel( 0.2, 0.88 )
-	AtlasUtil.DrawLuminosityFbSplit( 0.2, 0.87, lumi="4.6-4.8 + 20.7", sqrts="7 and 8" )
-	PyROOTUtils.DrawText( 0.2, 0.2, "m_{H} = 125.5 GeV", textSize=0.03 )
-
-	canvas.SaveAs( outFile )
-
-
-
-def drawCountingInterpCodesMuTMuW( inFile, outFile ):
-	canvas = ROOT.TCanvas( "canvas","canvas",800,600 )
-	axes = canvas.DrawFrame( 0.1,-2.2,2.8,6 )
-	axes.GetXaxis().SetTitle( "#mu^{f}_{ggF+ttH}" )
-	axes.GetYaxis().SetTitle( "#mu^{f}_{VBF+VH}" )
-	axes.GetYaxis().SetTitleOffset( 1.2 )
-
-	c68_0 = drawContours( inFile.replace(".root","_interpCode0.root"), "muTmuW", color = ROOT.kRed-3 )
-	c68_4 = drawContours( inFile,                                       "muTmuW", color = ROOT.kBlue )
-	c68_M1 = drawContours( inFile.replace(".root","_interpCodeM1.root"), "muTmuW", color = ROOT.kGreen-2 )
-	c68_M4 = drawContours( inFile.replace(".root","_interpCodeM4.root"), "muTmuW", color = ROOT.kGray )
-
-	leg2 = PyROOTUtils.Legend( 0.65, 0.90, textSize = 0.03 )
-	leg2.AddEntry( c68_0[0],  "InterpCode = 0", "L" )
-	leg2.AddEntry( c68_4[0],  "InterpCode = 4", "L" )
-	leg2.AddEntry( c68_M1[0], "InterpCode = -1", "L" )
-	leg2.AddEntry( c68_M4[0], "InterpCode = -4", "L" )
-	leg2.Draw()
-
-	canvas.SaveAs( outFile )
-
-def drawCountingEffShiftMuTmuW( inFileC, outFile ):
-	canvas = ROOT.TCanvas( "canvas","canvas",800,600 )
-	axes = canvas.DrawFrame( 0.1,-2.2,2.8,6 )
-	axes.GetXaxis().SetTitle( "#mu^{f}_{ggF+ttH}" )
-	axes.GetYaxis().SetTitle( "#mu^{f}_{VBF+VH}" )
-	axes.GetYaxis().SetTitleOffset( 1.2 )
-
-	c68_2ph_eff = drawContours( inFileC.replace(".root","_2ph_eff.root"), "profiledNLL", color = ROOT.kRed-3, scale=2.0, drawSmallestBinMarker=True )
-	c68_4l_eff = drawContours( inFileC.replace(".root","_4l_eff.root"), "profiledNLL", color = ROOT.kBlue, scale=2.0, drawSmallestBinMarker=True )
-	c68_lvlv_eff = drawContours( inFileC.replace(".root","_lvlv_eff.root"), "profiledNLL", color = ROOT.kGreen-2, scale=2.0, drawSmallestBinMarker=True )
-
-	c68_2ph_eff_shifted = drawContours( inFileC.replace(".root","_2ph_eff_shifted.root"), "profiledNLL", lineStyle=ROOT.kDashed, color = ROOT.kRed-3, scale=2.0, drawSmallestBinMarker=True )
-	c68_4l_eff_shifted = drawContours( inFileC.replace(".root","_4l_eff_shifted.root"), "profiledNLL", lineStyle=ROOT.kDashed, color = ROOT.kBlue, scale=2.0, drawSmallestBinMarker=True )
-	c68_lvlv_eff_shifted = drawContours( inFileC.replace(".root","_lvlv_eff_shifted.root"), "profiledNLL", lineStyle=ROOT.kDashed, color = ROOT.kGreen-2, scale=2.0, drawSmallestBinMarker=True )
-
-	leg = PyROOTUtils.Legend( 0.2, 0.32, textSize=0.03 )
-	leg.AddEntry( SMMarker, "Standard Model", "P" )
-	leg.AddEntry( blackSolid, "68% CL with #alpha_{QCDscale_ggH2in} = 0", "L" )
-	leg.AddEntry( blackDashed, "68% CL with #alpha_{QCDscale_ggH2in} = +1", "L" )
-	leg.Draw()
-	
-	leg2 = PyROOTUtils.Legend( 0.65, 0.90, textSize = 0.03 )
-	leg2.AddEntry( c68_2ph_eff[0],  "H #rightarrow #gamma#gamma", "L" )
-	leg2.AddEntry( c68_4l_eff[0],   "H #rightarrow ZZ* #rightarrow 4l", "L" )
-	leg2.AddEntry( c68_lvlv_eff[0], "H #rightarrow WW* #rightarrow l#nul#nu", "L" )
-	leg2.Draw()
-
-	#AtlasUtil.AtlasLabel( 0.2, 0.88 )
-	#AtlasUtil.DrawLuminosityFbSplit( 0.2, 0.81, lumi="4.6-4.8 + 20.7", sqrts="7 and 8" )
-	#PyROOTUtils.DrawText( 0.2, 0.2, "m_{H} = 125.5 GeV", textSize=0.03 )
-
-	canvas.SaveAs( outFile )
-
-
-
-
-
-def draw_counting_AllkVkF( inFileFM, inFile, outFile ):
-	canvas = ROOT.TCanvas( "canvas","canvas",800,600 )
-	axes = canvas.DrawFrame( 0.65,-1.7, 1.5,2.0 )
-	axes.GetXaxis().SetTitle( "#kappa_{V}" )
-	axes.GetYaxis().SetTitle( "#kappa_{F}" )
-	axes.GetYaxis().SetTitleOffset( 1.2 )
-
-	c68_comb = drawContours( inFileFM, "kVkF", color = ROOT.kBlue, drawSmallestBinMarker=True )
-	c95_comb = drawContours( inFileFM, "kVkF", color = ROOT.kBlue, lineStyle=ROOT.kDotted, level=6.0, levelName="95" )
-
-	c68_comb_eff = drawContours( inFile.replace("kVkF","kVkF_comb"), "kVkF", color = ROOT.kRed-3, drawSmallestBinMarker=True )
-	c95_comb_eff = drawContours( inFile.replace("kVkF","kVkF_comb"), "kVkF", color = ROOT.kRed-3, lineStyle=ROOT.kDotted, level=6.0, levelName="95" )
-
-	SMMarker = ROOT.TMarker( 1.0, 1.0, 34 )
-	SMMarker.SetMarkerColor( ROOT.kBlack )
-	SMMarker.Draw()
-
-	leg = PyROOTUtils.Legend( 0.72, 0.35, textSize=0.03 )
-	#leg.AddEntry( bestFitBlack, "Best fit", "P" )
-	leg.AddEntry( SMMarker, "Standard Model", "P" )
-	leg.AddEntry( c68_comb[0], "68% CL", "L" )
-	leg.AddEntry( c95_comb[0], "95% CL", "L" )
-	leg.Draw()
-	
-	leg2 = PyROOTUtils.Legend( 0.2, 0.84, textSize = 0.03 )
-	leg2.AddEntry( c68_comb[0], "full model", "L" )
-	leg2.AddEntry( c68_comb_eff[0], "effective model", "L" )
-	leg2.Draw()
-
-	canvas.SaveAs( outFile )
-
-def draw_counting_kGlukGamma( inFile, outFile ):
-	canvas = ROOT.TCanvas( "canvas","canvas",800,600 )
-	axes = canvas.DrawFrame( 0.75,0.62, 1.9,1.6 )
-	axes.GetXaxis().SetTitle( "#kappa_{#gamma}" )
-	axes.GetYaxis().SetTitle( "#kappa_{g}" )
-	axes.GetYaxis().SetTitleOffset( 1.2 )
-
-	c68_comb = drawContours( inFile, "kGlukGamma", color = ROOT.kBlack, drawSmallestBinMarker=True )
-	c95_comb = drawContours( inFile, "kGlukGamma", color = ROOT.kBlack, lineStyle=ROOT.kDotted, level=6.0, levelName="95" )
-
-	SMMarker = ROOT.TMarker( 1.0, 1.0, 34 )
-	SMMarker.SetMarkerColor( ROOT.kBlack )
-	SMMarker.Draw()
-
-	leg = PyROOTUtils.Legend( 0.72, 0.9, textSize=0.03 )
-	leg.AddEntry( SMMarker, "Standard Model", "P" )
-	#leg.AddEntry( bestFitBlack, "Best fit", "P" )
-	leg.AddEntry( c68_comb[0], "68% CL", "L" )
-	leg.AddEntry( c95_comb[0], "95% CL", "L" )
-	leg.Draw()
-	
-	# leg2 = PyROOTUtils.Legend( 0.72, 0.93, textSize = 0.03 )
-	# leg2.AddEntry( c68_comb[0], "combined", "L" )
-	# leg2.Draw()
-
-	canvas.SaveAs( outFile )
-
-
-def draw_counting_AllkGlukGamma( inFileFM, inFile, outFile ):
-	canvas = ROOT.TCanvas( "canvas","canvas",800,600 )
-	axes = canvas.DrawFrame( 0.75,0.62, 1.9,1.6 )
-	axes.GetXaxis().SetTitle( "#kappa_{#gamma}" )
-	axes.GetYaxis().SetTitle( "#kappa_{g}" )
-	axes.GetYaxis().SetTitleOffset( 1.2 )
-
-	c68_comb = drawContours( inFileFM, "kGlukGamma", color = ROOT.kBlue, drawSmallestBinMarker=True )
-	c95_comb = drawContours( inFileFM, "kGlukGamma", color = ROOT.kBlue, lineStyle=ROOT.kDotted, level=6.0, levelName="95" )
-
-	c68_comb_eff = drawContours( inFile, "kGlukGamma", color = ROOT.kRed, drawSmallestBinMarker=True )
-	c95_comb_eff = drawContours( inFile, "kGlukGamma", color = ROOT.kRed, lineStyle=ROOT.kDotted, level=6.0, levelName="95" )
-
-	SMMarker = ROOT.TMarker( 1.0, 1.0, 34 )
-	SMMarker.SetMarkerColor( ROOT.kBlack )
-	SMMarker.Draw()
-
-	leg = PyROOTUtils.Legend( 0.72, 0.9, textSize=0.03 )
-	leg.AddEntry( SMMarker, "Standard Model", "P" )
-	#leg.AddEntry( bestFitBlack, "Best fit", "P" )
-	leg.AddEntry( c68_comb[0], "68% CL", "L" )
-	leg.AddEntry( c95_comb[0], "95% CL", "L" )
-	leg.Draw()
-	
-	leg2 = PyROOTUtils.Legend( 0.72, 0.76, textSize = 0.03 )
-	leg2.AddEntry( c68_comb[0], "full model", "L" )
-	leg2.AddEntry( c68_comb_eff[0], "effective model", "L" )
-	leg2.Draw()
-
-	canvas.SaveAs( outFile )
-
-
 
 
 
 def main():
 
-	# drawCountingVsFullMuTmuW(    options.input+"muTmuW.root", "atlas_counting_model/standard_muTmuW.root", options.output+"muTmuW_countingVsFull.eps" )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW.eps", r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW.eps", r=[-0.1,-2.2,3.0,6.5] )
 	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/interpCode0_muTmuW.eps", opts={'interpCode0':True}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template4_etasfisherInfo.eps",         opts={'model':"template4"},         r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template0_etasfisherInfo.eps",         opts={'model':"template0"},         r=[-0.1,-2.2,3.0,6.5] )
-	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_templateM1_etasfisherInfo.eps",        opts={'model':"templateM1"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M4.eps",        opts={'model':"template14_etasgeneric_M4"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M4_box1.0.eps", opts={'model':"template14_etasgeneric_M4_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M5.eps",        opts={'model':"template14_etasgeneric_M5"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M5_box1.0.eps", opts={'model':"template14_etasgeneric_M5_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric_M5.eps",        opts={'model':"template10_etasgeneric_M5"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric_M5_box1.0.eps", opts={'model':"template10_etasgeneric_M5_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template4_etasfisherInfo.eps",         opts={'model':"template4"},         r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template0_etasfisherInfo.eps",         opts={'model':"template0"},         r=[-0.1,-2.2,3.0,6.5] )
 
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric10_learning.eps",        opts={'model':"template10_etasgeneric10_learning"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric10_learning_box1.0.eps", opts={'model':"template10_etasgeneric10_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric14_learning.eps",        opts={'model':"template14_etasgeneric14_learning"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric14_learning_box1.0.eps", opts={'model':"template14_etasgeneric14_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template20_etasgeneric20_learning.eps",        opts={'model':"template20_etasgeneric20_learning"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template20_etasgeneric20_learning_box1.0.eps", opts={'model':"template20_etasgeneric20_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template24_etasgeneric24_learning.eps",        opts={'model':"template24_etasgeneric24_learning"},        r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template24_etasgeneric24_learning_box1.0.eps", opts={'model':"template24_etasgeneric24_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M4.eps",        opts={'model':"template14_etasgeneric_M4"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M4_box1.0.eps", opts={'model':"template14_etasgeneric_M4_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M5.eps",        opts={'model':"template14_etasgeneric_M5"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric_M5_box1.0.eps", opts={'model':"template14_etasgeneric_M5_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric_M5.eps",        opts={'model':"template10_etasgeneric_M5"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric_M5_box1.0.eps", opts={'model':"template10_etasgeneric_M5_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
 
-	draw_muTmuW_frame( countingMuTMuWShifted, "plots/atlas_counting/muTmuW_shifted.eps", opts={'model':"template0_fixed_setParameteralpha_QCDscale_Higgs_ggH"}, r=[-0.1,-2.2,3.0,6.5] )
-	draw_muTmuW_frame( countingMuTMuWShifted, "plots/atlas_counting/muTmuW_shifted_etaArrows.eps", opts={'etaArrows':True, 'model':"template0_fixed_setParameteralpha_QCDscale_Higgs_ggH"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric10_learning.eps",        opts={'model':"template10_etasgeneric10_learning"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template10_etasgeneric10_learning_box1.0.eps", opts={'model':"template10_etasgeneric10_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric14_learning.eps",        opts={'model':"template14_etasgeneric14_learning"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template14_etasgeneric14_learning_box1.0.eps", opts={'model':"template14_etasgeneric14_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template20_etasgeneric20_learning.eps",        opts={'model':"template20_etasgeneric20_learning"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template20_etasgeneric20_learning_box1.0.eps", opts={'model':"template20_etasgeneric20_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template24_etasgeneric24_learning.eps",        opts={'model':"template24_etasgeneric24_learning"},        r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/muTmuW_template24_etasgeneric24_learning_box1.0.eps", opts={'model':"template24_etasgeneric24_learning_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
+
+	# draw_muTmuW_frame( countingMuTMuWShifted, "plots/atlas_counting/muTmuW_shifted.eps", opts={'model':"template0_fixed_setParameteralpha_QCDscale_Higgs_ggH"}, r=[-0.1,-2.2,3.0,6.5] )
+	# draw_muTmuW_frame( countingMuTMuWShifted, "plots/atlas_counting/muTmuW_shifted_etaArrows.eps", opts={'etaArrows':True, 'model':"template0_fixed_setParameteralpha_QCDscale_Higgs_ggH"}, r=[-0.1,-2.2,3.0,6.5] )
 	draw_muTmuW_frame( countingMuTMuWShifted, "plots/atlas_counting/interpCode0_muTmuW_shifted.eps", opts={'interpCode0':True, 'model':"template0_fixed_setParameteralpha_QCDscale_Higgs_ggH"}, r=[-0.1,-2.2,3.0,6.5] )
 	draw_muTmuW_frame( countingMuTMuWShifted, "plots/atlas_counting/interpCode0_muTmuW_shifted_etaArrows.eps", opts={'etaArrows':True, 'interpCode0':True, 'model':"template0_fixed_setParameteralpha_QCDscale_Higgs_ggH"}, r=[-0.1,-2.2,3.0,6.5] )
 
-	draw_muTmuW_frame( countingMuTMuWArrowsAtMuHat, "plots/atlas_counting/muTmuW_etaArrows.eps",             opts={},                   r=[0.1,0.5,2.1,2.5] )
+	# draw_muTmuW_frame( countingMuTMuWArrowsAtMuHat, "plots/atlas_counting/muTmuW_etaArrows.eps",             opts={},                   r=[0.1,0.5,2.1,2.5] )
 	draw_muTmuW_frame( countingMuTMuWArrowsAtMuHat, "plots/atlas_counting/interpCode0_muTmuW_etaArrows.eps", opts={'interpCode0':True}, r=[0.1,0.5,2.1,2.5] )
 
 	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/interpCode0_muTmuW_template0_etasfisherInfo.eps",                 opts={'interpCode0':True,'model':"template0"},                                r=[-0.1,-2.2,3.0,6.5] )
@@ -611,11 +416,6 @@ def main():
 	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/interpCode0_muTmuW_template20_etasgeneric20_learningFull.eps",        opts={'interpCode0':True,'model':"template20_etasgeneric20_learningFull"},        r=[-0.1,-2.2,3.0,6.5] )
 	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/interpCode0_muTmuW_template20_etasgeneric20_learningFull_box1.0.eps", opts={'interpCode0':True,'model':"template20_etasgeneric20_learningFull_box1.0"}, r=[-0.1,-2.2,3.0,6.5] )
 	draw_muTmuW_frame( countingMuTMuW, "plots/atlas_counting/interpCode0_muTmuW_template20_etasgeneric20_learningFull_wideGauss1.3.eps", opts={'interpCode0':True,'model':"template20_etasgeneric20_learningFull_wideGauss1.3"}, r=[-0.1,-2.2,3.0,6.5] )
-
-	# drawCountingInterpCodesMuTMuW( "output/atlas_counting_2ph_muTmuW_profiledContour.root", "output/atlas_counting_2ph_muTmuW_interpCodes.eps" )
-	# drawCountingInterpCodesMuTMuW( "output/atlas_counting_4l_muTmuW_profiledContour.root", "output/atlas_counting_4l_muTmuW_interpCodes.eps" )
-	# drawCountingInterpCodesMuTMuW( "output/atlas_counting_lvlv_muTmuW_profiledContour.root", "output/atlas_counting_lvlv_muTmuW_interpCodes.eps" )
-	# drawCountingEffShiftMuTmuW( "atlas_counting_model/standard_muTmuW.root", options.output+"muTmuW_countingShift.eps" )
 
 
 	# draw_kVkF_frame( counting_kVkF, "plots/atlas_counting/kVkF_combined.eps",                                                            r=[0.65,-1.7,1.5,2.0] )
@@ -668,21 +468,6 @@ def main():
 	# draw_kGlukGamma_frame( counting_kGlukGamma, "plots/atlas_counting/interpCode0_kGlukGamma_combined_naive.eps", opts={'interpCode0':True,'model':'template20_etasNone'},  r=[0.8,0.6,1.9,1.6] )
 	draw_kGlukGamma_frame( counting_kGlukGamma_overlay, "plots/atlas_counting/interpCode0_kGlukGamma_combined_template10_etasgeneric10_learningFull_overlay.eps", opts={'interpCode0':True,'skipNaive':True,'model':['template10_etasgeneric10_learningFull','template10_etasgeneric10_learningFull_wideGauss1.3']},  r=[0.8,0.6,1.9,1.6] )
 
-	# draw_counting_kVkF(          "atlas_counting_model/standard_fullCountingModelScan_kVkF.root",       options.output+"counting_standard_fullCountingModelScan_kVkF.eps" )
-	# draw_counting_AllkVkF(       "atlas_counting_model/standard_fullCountingModelScan_kVkF.root",       options.input+"counting_kVkF_doubleConstr.root", options.output+"counting_kVkF_doubleConstr.eps"   )
-	# draw_counting_AllkVkF(       "atlas_counting_model/standard_fullCountingModelScan_kVkF.root",       options.input+"counting_kVkF.root", options.output+"counting_kVkF.eps"   )
-	# draw_counting_AllkVkF(       "atlas_counting_model/standard_fullCountingModelScan_kVkF.root",       options.input+"counting_kVkF_fixed.root", options.output+"counting_kVkF_fixed.eps"   )
-	# draw_counting_AllkVkF(       "atlas_counting_model/standard_fullCountingModelScan_kVkF.root",       options.input+"counting_kVkF_profiled.root", options.output+"counting_kVkF_profiled.eps"   )
-	# draw_counting_kGlukGamma(    "atlas_counting_model/standard_fullCountingModelScan_kGlukGamma.root", options.output+"counting_standard_fullCountingModelScan_kGlukGamma.eps" )
-	# draw_counting_AllkGlukGamma( "atlas_counting_model/standard_fullCountingModelScan_kGlukGamma.root", options.input+"counting_kGlukGamma_doubleConstr.root", options.output+"counting_kGlukGamma_doubleConstr.eps" )
-	# draw_counting_AllkGlukGamma( "atlas_counting_model/standard_fullCountingModelScan_kGlukGamma.root", options.input+"counting_kGlukGamma.root", options.output+"counting_kGlukGamma.eps" )
-	# draw_counting_AllkGlukGamma( "atlas_counting_model/standard_fullCountingModelScan_kGlukGamma.root", options.input+"counting_kGlukGamma_fixed.root", options.output+"counting_kGlukGamma_fixed.eps" )
-	# draw_counting_AllkGlukGamma( "atlas_counting_model/standard_fullCountingModelScan_kGlukGamma.root", options.input+"counting_kGlukGamma_profiled.root", options.output+"counting_kGlukGamma_profiled.eps" )
-	# # box constraints
-	# draw_counting_kVkF(          "atlas_counting_model/box_fullCountingModelScan_kVkF.root",       options.output+"counting_box_fullCountingModelScan_kVkF.eps" )
-	# draw_counting_AllkVkF(       "atlas_counting_model/box_fullCountingModelScan_kVkF.root",       options.input+"counting_kVkF_profiled_box.root", options.output+"counting_kVkF_profiled_box.eps"   )
-	# draw_counting_kGlukGamma(    "atlas_counting_model/box_fullCountingModelScan_kGlukGamma.root", options.output+"counting_box_fullCountingModelScan_kGlukGamma.eps" )
-	# draw_counting_AllkGlukGamma( "atlas_counting_model/box_fullCountingModelScan_kGlukGamma.root", options.input+"counting_kGlukGamma_profiled_box.root", options.output+"counting_kGlukGamma_profiled_box.eps"   )
 
 	fileList = "`\ls plots/twoBin/*.eps plots/atlas_counting/*.eps`"
 	# print( "Merging eps files" )
