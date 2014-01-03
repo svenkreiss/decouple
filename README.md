@@ -1,6 +1,6 @@
 # Decouple and Recouple
 
-This repository contains the software implementation for our paper __A Novel Approach to Higgs Coupling Measurements__ (Cranmer, Kreiss, Lopez-Val, Plehn), arXiv:XXXX.XXXX. It contains tools to apply the discussed methods to new models and contains a Makefile to recreate the plots in the paper.
+This repository contains the software implementation for our paper __A Novel Approach to Higgs Coupling Measurements__ (Cranmer, Kreiss, Lopez-Val, Plehn), [arXiv:1401.0080 \[hep-ph\]](http://arxiv.org/abs/1401.0080). It contains tools to apply the discussed methods to new models and contains a Makefile to recreate the plots in the paper.
 
 A demo for the recoupling stage where the effective likelihood and template parametrization are readily provided is at [decoupledDemo](http://github.com/svenkreiss/decoupledDemo).
 
