@@ -7,27 +7,13 @@ A demo for the recoupling stage where the effective likelihood and template para
 
 # Prerequisites
 
-You need the right root version. There are a few features that are not in main root yet:
-
-- BatchProfileLikelihood scripts
-- proper HistFactory copy constructors for python counting models
-- PyROOTUtils
-
-
-To get the version that is used for development, use something like:
+On the python side, please have the modules `numpy` and `progressbar` installed and extend your PYTHONPATH environment variable with the path to `decouple`:
 
 ```
-git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
+export PYTHONPATH=/Path/to/your/decouple:$PYTHONPATH
 ```
 
-NOTE: currently, you need the special branch `hfBugs` that fixes the copy constructors in HistFactory.
-
-You need to add the following to your PYTHONPATH environment variable:
-
-```
-export PYTHONPATH=$ROOTSYS/tutorials/roostats/py:/Path/to/your/decouple:$PYTHONPATH
-```
-
+You will also need a version of ROOT with PyROOT enabled.
 
 **Higgs Coupling numbers from Yellow Report 3**:
 The module `LHCXSHiggsCouplings` (included in this repository) is required to run the benchmark coupling models. Please see the [README file](Decouple/src/LHCXSHiggsCouplings/README.md). To get started quickly, just run from the root repository directory:
@@ -35,6 +21,31 @@ The module `LHCXSHiggsCouplings` (included in this repository) is required to ru
 ```
 svn co https://svn.cern.ch/reps/lhchiggsxs/repository/Higgs-coupling/data Decouple/src/LHCXSHiggsCouplings/Higgs-coupling-data
 ```
+
+
+### Additional prerequisites for decouple.py
+
+You don't need this additional part for the `decoupledDemo` project.
+
+You need the right ROOT version. There are a few features that are not in main root yet:
+
+- BatchProfileLikelihood scripts
+- proper HistFactory copy constructors for python counting models
+
+To get the version that is used for development, use something like:
+
+```
+git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
+```
+
+NOTE: currently, you need the special branch `hfBugs` instead of `development` that fixes the copy constructors in HistFactory.
+
+In addition to the PYTHONPATH extension above, you will then also need:
+
+```
+export PYTHONPATH=$ROOTSYS/tutorials/roostats/py:$PYTHONPATH
+```
+
 
 
 # Running on any model
