@@ -52,7 +52,7 @@ export PYTHONPATH=$ROOTSYS/tutorials/roostats/py:$PYTHONPATH
 
 You can create your own model and run `decouple.py` and `recouple.py` on them. `decouple.py` takes root files with a RooWorkspace, containing the model as input and produces the effective Likelihood and eta files. `recouple.py` takes eta files and effective Likelihoods (also from multiple channels to do a combination) and produces coupling results.
 
-Example models are in the module ModelGenerators ([README file](ModelGenerators/README.md)).
+Example models are in the module ModelGenerators.
 
 A fully working example that _recouples_ a model that someone else decoupled is implemented in the [decoupledDemo](http://github.com/svenkreiss/decoupledDemo) project.
 
