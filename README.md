@@ -15,12 +15,6 @@ export PYTHONPATH=/Path/to/your/decouple:$PYTHONPATH
 
 You will also need a version of ROOT with PyROOT enabled.
 
-**Higgs Coupling numbers from Yellow Report 3**:
-The module `LHCXSHiggsCouplings` (included in this repository) is required to run the benchmark coupling models. Please see the [README file](Decouple/src/LHCXSHiggsCouplings/README.md). To get started quickly, just run from the root repository directory:
-
-```
-svn co https://svn.cern.ch/reps/lhchiggsxs/repository/Higgs-coupling/data Decouple/src/LHCXSHiggsCouplings/Higgs-coupling-data
-```
 
 
 ### Additional prerequisites for decouple.py
@@ -75,4 +69,3 @@ For finer control, the framework can also be run step-by-step:
 4. `make plots`
 
 The above chain can be used as a best-practice example to setup your own models. The Makefile is just a guide so that you can see how to run `Decouple/decouple.py` and `Decouple/recouple.py` yourself on your own models.
-

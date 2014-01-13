@@ -1,15 +1,16 @@
-*.py[cod]
-*.DS_Store
-*.dropbox
-*.pdf
-
 output
 plots
 xml
 *_xml
 HepDataTools
-Higgs-coupling-data
 env
+Decouple/src/LHCXSHiggsCouplings/Higgs-coupling-data/mssm-raw/
+.svn
+
+*.py[cod]
+*.DS_Store
+*.dropbox
+*.pdf
 
 # ROOT
 *.root
