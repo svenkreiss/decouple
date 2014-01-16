@@ -100,15 +100,15 @@ def drawAllArrows( allEtas, cut=0.03, detailed=False ):
 				arrows = drawArrows( etas, muIn, npVal, lineWidth, cut, template=template )
 				container.append(arrows)
 		
-		leg = PyROOTUtils.Legend( 0.2,0.2, textSize=0.03, valign="bottom" )
+		leg = PyROOTUtils.Legend( 0.2,0.85, textSize=0.035 )
 		for a,p in arrows:
 			leg.AddEntry( a, parameterNames[p.replace("alpha_","")], "L" )
 		leg.Draw()
 
 		if cut > 0.0:
-			PyROOTUtils.DrawText( 0.2,0.88, "showing only |#eta| > %.0f%%" % (cut*100.0), textSize=0.03 )
+			PyROOTUtils.DrawText( 0.2,0.88, "showing only |#eta| > %.0f%%" % (cut*100.0), textSize=0.035 )
 		if detailed:
-			PyROOTUtils.DrawText( 0.2, 0.8, "positive variation thick\nnegative variation thin", textSize=0.03 )
+			PyROOTUtils.DrawText( 0.2, 0.25, "positive variation thick\nnegative variation thin", textSize=0.035 )
 
 		if detailed: canvas.SaveAs( options.output+etasName+"_detailed.eps" )
 		else: canvas.SaveAs( options.output+etasName+".eps" )

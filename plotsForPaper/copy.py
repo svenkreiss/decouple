@@ -37,11 +37,11 @@ files = [
 	# 'plots/atlas_counting/interpCode0_muTmuW_template10_etasgeneric_M5.eps',
 	# 'plots/atlas_counting/interpCode0_muTmuW_template20_etasgeneric20_learningFull.eps',
 
-	# ('plots/atlas_counting/2ph_interpCode0_etas/fisherInfo.eps', '2ph_etas_fisherInfo.eps'),
+	('plots/atlas_counting/2ph_interpCode0_etas/fisherInfo.eps', '2ph_etas_fisherInfo.eps'),
 	# ('plots/atlas_counting/2ph_interpCode0_etas/table_etas.py',  '2ph_etas_table.py'),
-	# ('plots/atlas_counting/4l_interpCode0_etas/fisherInfo.eps', '4l_etas_fisherInfo.eps'),
+	('plots/atlas_counting/4l_interpCode0_etas/fisherInfo.eps', '4l_etas_fisherInfo.eps'),
 	# ('plots/atlas_counting/4l_interpCode0_etas/table_etas.py',  '4l_etas_table.py'),
-	# ('plots/atlas_counting/lvlv_interpCode0_etas/fisherInfo.eps', 'lvlv_etas_fisherInfo.eps'),
+	('plots/atlas_counting/lvlv_interpCode0_etas/fisherInfo.eps', 'lvlv_etas_fisherInfo.eps'),
 	# ('plots/atlas_counting/lvlv_interpCode0_etas/table_etas.py',  'lvlv_etas_table.py'),
 
 	# 'plots/atlas_counting/interpCode0_kGlukGamma_combined_template10_etasgeneric_M5.eps',
@@ -58,11 +58,11 @@ files = [
 	# 'plots/atlas_counting/interpCode0_kVkF_combined_template10_etasgeneric10_learningFull_box1.0.eps',
 	# 'plots/atlas_counting/interpCode0_kVkF_combined_template10_etasgeneric10_learningFull_wideGauss1.3.eps',
 	# 'plots/atlas_counting/interpCode0_kVkF_combined_template10_etasgeneric10_learningFull_overlay.eps',
-	'plots/atlas_counting/interpCode0_kGlukGamma_combined_template10_etasgeneric10_learningFull_overlay.eps',
+	# 'plots/atlas_counting/interpCode0_kGlukGamma_combined_template10_etasgeneric10_learningFull_overlay.eps',
 
-	# ('../dotProduct/plots/2ph_robustness_normEtas_normTh2.eps', 'atlas_counting/robustness_2ph.eps'),
-	# ('../dotProduct/plots/ZZ_robustness_normEtas_normTh2.eps', 'atlas_counting/robustness_4l.eps'),
-	# ('../dotProduct/plots/WW_robustness_normEtas_normTh2.eps', 'atlas_counting/robustness_lvlv.eps'),
+	('~/tex/papers/CouplingsFromProdModes/dotProduct/plots/2ph_robustness_normEtas_normTh2.eps', 'atlas_counting/robustness_2ph.eps'),
+	('~/tex/papers/CouplingsFromProdModes/dotProduct/plots/ZZ_robustness_normEtas_normTh2.eps', 'atlas_counting/robustness_4l.eps'),
+	('~/tex/papers/CouplingsFromProdModes/dotProduct/plots/WW_robustness_normEtas_normTh2.eps', 'atlas_counting/robustness_lvlv.eps'),
 ]
 
 
