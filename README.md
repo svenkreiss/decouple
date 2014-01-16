@@ -24,15 +24,12 @@ You don't need this additional part for the `decoupledDemo` project.
 You need the right ROOT version. There are a few features that are not in main root yet:
 
 - BatchProfileLikelihood scripts
-- proper HistFactory copy constructors for python counting models
 
 To get the version that is used for development, use something like:
 
 ```
 git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
 ```
-
-NOTE: currently, you need the special branch `hfBugs` instead of `development` that fixes the copy constructors in HistFactory.
 
 In addition to the PYTHONPATH extension above, you will then also need:
 
