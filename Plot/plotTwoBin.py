@@ -266,10 +266,12 @@ def profiledContourOverlay(opts={}):
 	if 'box' not in opts: fullFile = "output/twoBin/"+opts['type']+"/muTmuW.root"
 	else:                 fullFile = "output/twoBin/"+opts['type']+"_box/muTmuW.root"
 	effFile = "output/twoBin/"+opts['type']+"/muTmuW_eff.root"
+	learningSuffix = ''
+	if 'learningFull' in opts: learningSuffix = 'Full'
 
 	profiledFiles = [
 		('aligned', "output/twoBin/"+opts['type']+"/muTmuW_profiledContour_template0.root", ROOT.kRed, ROOT.kSolid),
-		('learning', "output/twoBin/"+opts['type']+"/muTmuW_profiledContour_template20_etasgeneric20_learning.root", ROOT.kBlue, 5),
+		('learning', "output/twoBin/"+opts['type']+"/muTmuW_profiledContour_template20_etasgeneric20_learning"+learningSuffix+".root", ROOT.kBlue, 5),
 	]
 	if 'byHand' in opts:
 		profiledFiles.insert(1, 
@@ -350,20 +352,34 @@ def main():
 		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template14_etasgeneric_M5.eps", opts={"type":s,"template14_etasgeneric_M5":True} )
 		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template14_etasgeneric_fisherInfo.eps", opts={"type":s,"template14_etasgeneric_fisherInfo":True} )
 
-		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template10_etasgeneric10_learning.eps", opts={"type":s,"template10_etasgeneric10_learning":True} )
-		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template14_etasgeneric14_learning.eps", opts={"type":s,"template14_etasgeneric14_learning":True} )
-		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template20_etasgeneric20_learning.eps", opts={"type":s,"template20_etasgeneric20_learning":True} )
-		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template24_etasgeneric24_learning.eps", opts={"type":s,"template24_etasgeneric24_learning":True} )
+		# draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template10_etasgeneric10_learning.eps", opts={"type":s,"template10_etasgeneric10_learning":True} )
+		# draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template14_etasgeneric14_learning.eps", opts={"type":s,"template14_etasgeneric14_learning":True} )
+		# draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template20_etasgeneric20_learning.eps", opts={"type":s,"template20_etasgeneric20_learning":True} )
+		# draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template24_etasgeneric24_learning.eps", opts={"type":s,"template24_etasgeneric24_learning":True} )
+
+		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template10_etasgeneric10_learningFull.eps", opts={"type":s,"template10_etasgeneric10_learningFull":True} )
+		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template14_etasgeneric14_learningFull.eps", opts={"type":s,"template14_etasgeneric14_learningFull":True} )
+		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template20_etasgeneric20_learningFull.eps", opts={"type":s,"template20_etasgeneric20_learningFull":True} )
+		draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+"_muTmuW_template24_etasgeneric24_learningFull.eps", opts={"type":s,"template24_etasgeneric24_learningFull":True} )
 
 	for s in scenarios:
 		for i in ['_interpCode0']:
 			draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+i+"_muTmuW_template20_etasgeneric20_learning_box1.0.eps", opts={"type":s+i,"template20_etasgeneric20_learning_box1.0":True} )
+			draw_muTmuW_frame( profiledContour, "plots/twoBin/"+s+i+"_muTmuW_template20_etasgeneric20_learningFull_box1.0.eps", opts={"type":s+i,"template20_etasgeneric20_learningFull_box1.0":True} )
 
 			opts = {"type":s+i}
 			if "scenarioC" in s: opts['byHand'] = True
+
 			draw_muTmuW_frame( profiledContourOverlay, "plots/twoBin/"+s+i+"_muTmuW_overlay.eps", opts=opts,     r=[0.5,0.3,1.8,2.2] )
+			optsFull = dict( [(k,v) for k,v in opts.iteritems()] )
+			optsFull['learningFull'] = True
+			draw_muTmuW_frame( profiledContourOverlay, "plots/twoBin/"+s+i+"_muTmuW_overlay_learningFull.eps", opts=optsFull,     r=[0.5,0.3,1.8,2.2] )
+
 			opts['box'] = True
 			draw_muTmuW_frame( profiledContourOverlay, "plots/twoBin/"+s+i+"_muTmuW_overlay_box.eps", opts=opts, r=[0.5,0.3,1.8,2.2] )
+			optsFull = dict( [(k,v) for k,v in opts.iteritems()] )
+			optsFull['learningFull'] = True
+			draw_muTmuW_frame( profiledContourOverlay, "plots/twoBin/"+s+i+"_muTmuW_overlay_box_learningFull.eps", opts=optsFull, r=[0.5,0.3,1.8,2.2] )
 
 
 	fileList = "`\ls plots/twoBin/*.eps plots/atlas_counting/*.eps`"
