@@ -700,7 +700,7 @@ def _fill(x_y_inputs_options):
 	value = m.profileTwoNll( x, y )
 	return (x,y,value,m.nuisanceParameters)
 
-def fillHist(h,x,y, inputs, options, npHistograms=None):
+def fillHist(h,x,y, inputs, options, npHistograms=None, matplotlibprogress=True):
 	""" Give an empty dictionary to npHistograms to have it filled. """
 
 	if options.single:
@@ -731,16 +731,27 @@ def fillHist(h,x,y, inputs, options, npHistograms=None):
 			for j in range( y[0] ):
 				yVal = y[1] + (j+0.5)*(y[2]-y[1]) / y[0]
 				paramPoints.append( (xVal,yVal) )
+		numpyArray = numpy.zeros( (x[0],y[0]) )
+		if matplotlibprogress == True:
+			import matplotlib
+			import matplotlib.pyplot as plt
+			import time
+			# plt.ion()
+			plt.imshow(numpyArray, extent=[x[1], x[2], y[1], y[2]], interpolation='nearest', aspect='auto', cmap=plt.cm.Reds)
+			plt.show(block=False)
+			plt.pause(0.0001)
+			lastUpdate = time.time()
+			# raw_input("wait")
 
 		p = Pool()
 		progress = ProgressBar(maxval=len(paramPoints))
 		progress.start()
-		for i,values in enumerate(p.imap_unordered(_fill, [(x,y,inputs,options) for x,y in paramPoints], len(paramPoints)/100)):
+		for i,values in enumerate(p.imap_unordered(_fill, [(xVal,yVal,inputs,options) for xVal,yVal in paramPoints], len(paramPoints)/100)):
 			# print( 'progress: %0.1f%%' % (100.0*i/(len(paramPoints))) )
 			progress.update(i)
 
-			x,y,value,nps = values
-			bin = h.FindBin( x,y )
+			xVal,yVal,value,nps = values
+			bin = h.FindBin( xVal,yVal )
 			h.SetBinContent( bin,value )
 
 			# fill nuisance parameter histograms
@@ -752,5 +763,17 @@ def fillHist(h,x,y, inputs, options, npHistograms=None):
 						npHistograms[npName].GetZaxis().SetTitle( 'nuisance parameter value' )
 					npHistograms[npName].SetBinContent( bin, npValue )
 
+			# full matplotlib realtime histogram
+			if matplotlibprogress == True:
+				xBin,yBin,zBin = (ROOT.Long(0),ROOT.Long(0),ROOT.Long(0))
+				h.GetBinXYZ(bin,xBin,yBin,zBin)
+				numpyArray[yBin-1][xBin-1] = value
+				if (time.time() - lastUpdate) > 0.05:
+					plt.imshow(numpyArray, extent=[x[1], x[2], y[1], y[2]], interpolation='nearest', aspect='auto', cmap=plt.cm.Reds, norm=matplotlib.colors.Normalize(0.0,10.0), origin='lower')
+					plt.show(block=False)
+					plt.pause(0.0001)
+					lastUpdate = time.time()
+
 		progress.finish()
+
 
