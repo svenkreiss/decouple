@@ -4,7 +4,6 @@ xml
 *_xml
 HepDataTools
 env
-Decouple/src/LHCXSHiggsCouplings/Higgs-coupling-data/mssm-raw/
 .svn
 
 *.py[cod]

@@ -35,7 +35,7 @@ ROOT.gROOT.SetBatch( True )
 import PyROOTUtils
 
 
-from LHCXSHiggsCouplings import *
+from LHCHiggsCouplings import *
 
 def map_2ph( kV,kF ):
 	# convert to muT,muW coordinates
