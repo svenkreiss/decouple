@@ -1726,8 +1726,7 @@ def convertEtasDictToPy( etasDict ):
 	return out
 
 
-
-if __name__ == "__main__":
+def main():
 	if not options.verbose:
 		ROOT.RooMsgService.instance().setGlobalKillBelow(ROOT.RooFit.FATAL)
 
@@ -1771,5 +1770,7 @@ if __name__ == "__main__":
 
 	print( "Output written to: "+options.output )
 
+if __name__ == "__main__":
+	main()
 
 

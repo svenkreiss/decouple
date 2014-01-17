@@ -8,7 +8,7 @@ __description__ = """
 Second stage of DECOUPLE.
 """
 
-import src.effectiveModel
+import Decouple.src.effectiveModel
 
 import optparse
 parser = optparse.OptionParser(version=__version__, description=__description__)
@@ -42,18 +42,16 @@ import os
 
 
 def main():
-	currentPath = os.path.dirname(os.path.realpath(__file__))
-
 	print( "Creating output directory." )
 	os.system( "mkdir -p "+options.output )
 
 	# muTmuW: profiled
 	if not options.skip_muTmuW:
 		print("\n\n----- muTmuW scan -----\n")
-		r = os.system( 'time python '+currentPath+'/src/muTmuW.py \
+		r = os.system( 'time recouple_mutmuw \
 			-i "'+options.input+'" \
 			'+options.options_muTmuW+' \
-			'+src.effectiveModel.optionsString(options)+' \
+			'+Decouple.src.effectiveModel.optionsString(options)+' \
 			--profile \
 			--output='+options.output+'muTmuW_profiledContour.root'
 		)
@@ -62,10 +60,10 @@ def main():
 	# kVkF: profiled
 	if not options.skip_kVkF:
 		print("\n\n----- kVkF scan -----\n")
-		r = os.system( 'time python '+currentPath+'/src/kVkF.py \
+		r = os.system( 'time recouple_kvkf \
 			-i "'+options.input+'" \
 			'+options.options_kVkF+' \
-			'+src.effectiveModel.optionsString(options)+' \
+			'+Decouple.src.effectiveModel.optionsString(options)+' \
 			--profile \
 			--output='+options.output+'kVkF_profiledContour.root'
 		)
@@ -74,10 +72,10 @@ def main():
 	# kGlukGamma: profiled
 	if not options.skip_kGlukGamma:
 		print("\n\n----- kGlukGamma scan -----\n")
-		r = os.system( 'time python '+currentPath+'/src/kGlukGamma.py \
+		r = os.system( 'time recouple_kglukgamma \
 			-i "'+options.input+'" \
 			'+options.options_kGlukGamma+' \
-			'+src.effectiveModel.optionsString(options)+' \
+			'+Decouple.src.effectiveModel.optionsString(options)+' \
 			--profile \
 			--output='+options.output+'kGlukGamma_profiledContour.root'
 		)
