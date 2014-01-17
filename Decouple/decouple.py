@@ -5,7 +5,7 @@ __author__ = "Sven Kreiss, Kyle Cranmer"
 __version__ = "0.1"
 
 __description__ = """
-First stage of DECOUPLE.
+First stage of Decouple.
 """
 
 import optparse

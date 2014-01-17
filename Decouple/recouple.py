@@ -5,7 +5,7 @@ __author__ = "Sven Kreiss, Kyle Cranmer"
 __version__ = "0.1"
 
 __description__ = """
-Second stage of DECOUPLE.
+Second stage of Decouple.
 """
 
 import Decouple.src.effectiveModel
@@ -13,7 +13,7 @@ import Decouple.src.effectiveModel
 import optparse
 parser = optparse.OptionParser(version=__version__, description=__description__)
 parser.add_option("-i", "--input", dest="input", default="inputs/atlas_prodModes_hists_and_response_functions.root:ggFttH_VBFVH_eff_2ph", help="Input. The syntax is rootFileName:histName. It is assumed that the etasFile is rootFileName.replace('.root','_table_etas.py'). If that is not the case, it can be specified with rootFileName:histName:etasFileName. It is also assumed that the input is a histogram containing values for -2 ln Lambda. If it is -ln Lambda, a scale of 2 can be specified as the fourth element: rootFileName:histName:etasFileName:2." )
-src.effectiveModel.addOptionsToParser( parser )
+Decouple.src.effectiveModel.addOptionsToParser( parser )
 parser.add_option("-o", "--output", dest="output", default=None, help="Output directory. If not given, a directory with the same name as the input file will be created.")
 parser.add_option(      "--options_muTmuW", dest="options_muTmuW", default="--range=0.2,0.2,2.5,2.5 --bins=100,100", help="Options for muTmuW scan.")
 parser.add_option(      "--options_kVkF", dest="options_kVkF", default="--range=0.2,0.2,2.5,2.5 --bins=100,100", help="Options for kVkF scan.")
