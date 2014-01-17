@@ -19,8 +19,8 @@ if __name__ == "__main__":
 
 import ROOT
 if __name__ == "__main__": ROOT.gROOT.SetBatch( True )
-import helperStyle
 import PyROOTUtils
+PyROOTUtils.style()
 import os
 
 import pickle
