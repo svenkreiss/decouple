@@ -43,3 +43,12 @@ For finer control, the framework can also be run step-by-step:
 4. `make plots`
 
 The above chain can be used as a best-practice example to setup your own models. The Makefile is just a guide so that you can see how to run `Decouple/decouple.py` and `Decouple/recouple.py` yourself on your own models.
+
+
+# Related Packages
+
+This package depends on a few related Python packages that are generally useful. For this package, they are installed automatically by `pip` with the install instructions above.
+
+* [LHCHiggsCouplings](http://github.com/svenkreiss/LHCHiggsCouplings): Interface to cross sections and branching ratios published by the LHC Higgs Cross Section Working Group with interpolation in Higgs mass.
+* [BatchLikelihoodScan](http://github.com/svenkreiss/BatchLikelihoodScan): Powerful tool for likelihood scans and easily runs on batch clusters.
+* [PyROOTUtils](http://github.com/svenkreiss/PyROOTUtils): Collection of useful tools for working with TGraphs and generally plotting with ROOT.
