@@ -5,38 +5,15 @@ This repository contains the software implementation for our paper __A Novel App
 A demo for the recoupling stage where the effective likelihood and template parametrization are readily provided is at [decoupledDemo](http://github.com/svenkreiss/decoupledDemo).
 
 
-# Prerequisites
+# Install
 
-On the python side, please have the modules `numpy` and `progressbar` installed and extend your PYTHONPATH environment variable with the path to `decouple`:
-
-```
-export PYTHONPATH=/Path/to/your/decouple:$PYTHONPATH
-```
-
-You will also need a version of ROOT with PyROOT enabled.
-
-
-
-### Additional prerequisites for decouple.py
-
-You don't need this additional part for the `decoupledDemo` project.
-
-You need the right ROOT version. There are a few features that are not in main root yet:
-
-- BatchProfileLikelihood scripts
-
-To get the version that is used for development, use something like:
+Create a `virtualenv` (which usually comes with your python environment or can be insalled) and install this package with pip:
 
 ```
-git clone -b development https://github.com/svenkreiss/root.git root_branch_v534
+virtualenv venv
+source venv/bin/activate
+pip install git+https://github.com/svenkreiss/decouple.git
 ```
-
-In addition to the PYTHONPATH extension above, you will then also need:
-
-```
-export PYTHONPATH=$ROOTSYS/tutorials/roostats/py:$PYTHONPATH
-```
-
 
 
 # Running on any model
