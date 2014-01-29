@@ -31,6 +31,8 @@ if not options.verbose: ROOT.gROOT.SetBatch( True )
 from multiprocessing import Pool
 from pprint import pprint
 
+import BatchLikelihoodScan.Plugins.muTmuW
+
 from fullModel_utils import *
 from scipy import optimize
 
@@ -40,6 +42,7 @@ import numpy as np
 import pickle
 import math
 import numpy
+
 
 
 
@@ -1569,7 +1572,7 @@ def getAllEtas( inFile, method = "fisherInfo" ):
 
 
 	# convert input model into a muT,muW model
-	__import__("plugin-muTmuW").preprocess( f,w,mc,data )
+	BatchLikelihoodScan.Plugins.muTmuW.preprocess( f,w,mc,data )
 
 	poiL = ROOT.RooArgList( mc.GetParametersOfInterest() )
 	nuisLAll = ROOT.RooArgList( mc.GetNuisanceParameters() )
