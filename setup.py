@@ -2,8 +2,8 @@ from distutils.core import setup
  
 setup(
     name='Decouple',
-    version='1.1.0',
-    packages=['Decouple', 'Decouple.src'],
+    version='1.1.2',
+    packages=['Decouple', 'Decouple.src', 'Decouple.BatchPlugins'],
     license='LICENSE',
     description='Decouple and recouple.',
     long_description=open('README.md').read(),
@@ -11,7 +11,7 @@ setup(
     author_email='sk@svenkreiss.com',
 
     dependency_links= [
-        'https://github.com/svenkreiss/BatchLikelihoodScan/tarball/master#egg=BatchLikelihoodScan-1.0.2',
+        'https://github.com/svenkreiss/BatchLikelihoodScan/tarball/master#egg=BatchLikelihoodScan-1.0.3',
         'https://github.com/svenkreiss/LHCHiggsCouplings/tarball/master#egg=LHCHiggsCouplings-1.0.0',
     ],
     install_requires= [

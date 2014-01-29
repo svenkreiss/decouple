@@ -69,7 +69,7 @@ def main():
 		# --setConstant='+(','.join(parametersZero))+'
 		r = os.system( 'batch_likelihood_scan \
 			-i '+options.input+' \
-			--plugins=BatchLikelihoodScan.Plugins.muTmuW,plugin-mleForCouplingsFromProdModes \
+			--plugins=BatchLikelihoodScan.Plugins.muTmuW,Decouple.BatchPlugins.mleCommonNPExceptMuProd \
 			'+params+' \
 			> '+options.output+'muTmuW_eff.log'
 		)
@@ -85,7 +85,7 @@ def main():
 
 		r = os.system( 'batch_likelihood_scan \
 			-i '+options.input+' \
-			--plugins=BatchLikelihoodScan.Plugins.muTmuW,plugin-mleAllForCouplingsFromProdModes \
+			--plugins=BatchLikelihoodScan.Plugins.muTmuW,Decouple.BatchPlugins.mleAllExceptMuProd \
 			--setConstant='+(','.join(parametersZero))+' \
 			'+params+' \
 			> '+options.output+'muTmuW_statOnly.log'
