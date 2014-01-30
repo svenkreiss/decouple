@@ -70,6 +70,7 @@ def main():
 		r = os.system( 'batch_likelihood_scan \
 			-i '+options.input+' \
 			--plugins=BatchLikelihoodScan.Plugins.muTmuW,Decouple.BatchPlugins.mleCommonNPExceptMuProd \
+			--pluginOptions="--commonNP='+options.parameters+'" \
 			'+params+' \
 			> '+options.output+'muTmuW_eff.log'
 		)

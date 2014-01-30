@@ -93,10 +93,13 @@ other: studyInterpCodes
 
 
 ######################################################
-# decouple (not just etas)
+# decouple
+
+output/twoBin/twoAlpha_%/table_etas.pickle: output/twoBin/twoAlpha_%.root
+	python Decouple/decouple.py -i $< -p alpha_sys_GGF,alpha_sys_VBF
 
 output/twoBin/%/table_etas.pickle: output/twoBin/%.root
-	python Decouple/decouple.py -i $< -p alpha_sys,alpha_sys_GGF
+	python Decouple/decouple.py -i $< -p alpha_sys
 
 decoupleTwoBin: \
 		output/twoBin/oneAlpha_catUniversal/table_etas.pickle \
