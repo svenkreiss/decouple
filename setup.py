@@ -2,7 +2,7 @@ from distutils.core import setup
  
 setup(
     name='Decouple',
-    version='1.1.2',
+    version='1.1.3',
     packages=['Decouple', 'Decouple.src', 'Decouple.BatchPlugins'],
     license='LICENSE',
     description='Decouple and recouple.',
