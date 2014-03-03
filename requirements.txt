@@ -1,0 +1,9 @@
+-e git+https://github.com/svenkreiss/BatchLikelihoodScan.git@5012ae231a0c162bc9d0b9f79fcc4268b268f677#egg=BatchLikelihoodScan-master
+-e git+https://github.com/svenkreiss/decouple.git@07a25263c977bdaa88f1e8ff77c9e2240cbe2ed3#egg=Decouple-master
+-e git+https://github.com/svenkreiss/LHCHiggsCouplings.git@2e0b4781a658f01563b2820541b1d84f29caef98#egg=LHCHiggsCouplings-master
+-e git+https://github.com/svenkreiss/PyROOTUtils.git@0d47e0440aa9a058f2cfaa15ca27c2132f0218ea#egg=PyROOTUtils-master
+multiprocessing==2.6.2.1
+numpy==1.8.0
+progressbar==2.2
+scipy==0.13.3
+wsgiref==0.1.2

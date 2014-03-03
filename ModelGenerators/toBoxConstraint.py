@@ -27,7 +27,7 @@ options,args = parser.parse_args()
 
 import ROOT
 ROOT.gROOT.SetBatch( True )
-from Decouple.src.fullModel_utils import *
+from Decouple.fullModel_utils import *
 
 container = []
 
