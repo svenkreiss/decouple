@@ -18,8 +18,10 @@ if not options.inputFull: options.inputFull = options.input
 
 import ROOT
 ROOT.gROOT.SetBatch( True )
-import helperStyle
 import os
+
+import PyROOTUtils
+PyROOTUtils.style()
 
 
 def main():

@@ -17,11 +17,11 @@ ROOT.gROOT.SetBatch( True )
 import glob, re, os
 from array import array
 
-import helperStyle
 import PyROOTUtils
+PyROOTUtils.style()
 
 from parameterNames import parameterNames
-from Decouple.src.plot_utils import getContours, getSmallestBinMarker, getInterpolatedMinimumMarker, drawContours, drawH, draw_muTmuW_frame, draw_kVkF_frame, draw_kGlukGamma_frame
+from Decouple.plot_utils import getContours, getSmallestBinMarker, getInterpolatedMinimumMarker, drawContours, drawH, draw_muTmuW_frame, draw_kVkF_frame, draw_kGlukGamma_frame
 
 
 

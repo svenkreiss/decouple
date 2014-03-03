@@ -24,7 +24,7 @@ PyROOTUtils.style()
 import os
 
 import pickle
-import Decouple.src.effectiveModel
+import Decouple.effectiveModel
 import math
 from parameterNames import parameterNames
 
@@ -34,7 +34,7 @@ container = []
 
 def drawArrows( etas, muIn={'muT':1.0,'muW':1.0}, npVal=1.0, lineWidth=3.0, cut=0.03, template=10, flipSign=True ):
 
-	m = Decouple.src.effectiveModel.EffectiveParametrization()
+	m = Decouple.effectiveModel.EffectiveParametrization()
 	m.extractNuisanceParametersFromEtas(etas)
 	m.template = template
 

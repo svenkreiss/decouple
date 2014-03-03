@@ -19,10 +19,10 @@ options,args = parser.parse_args()
 
 import ROOT
 from array import array
-
-import helperStyle
-import PyROOTUtils
 import math
+
+import PyROOTUtils
+PyROOTUtils.style()
 
 container = []
 
