@@ -96,10 +96,10 @@ other: studyInterpCodes
 # decouple
 
 output/twoBin/twoAlpha_%/table_etas.pickle: output/twoBin/twoAlpha_%.root
-	python Decouple/decouple.py -i $< -p alpha_sys_GGF,alpha_sys_VBF
+	decouple -i $< -p alpha_sys_GGF,alpha_sys_VBF
 
 output/twoBin/%/table_etas.pickle: output/twoBin/%.root
-	python Decouple/decouple.py -i $< -p alpha_sys
+	decouple -i $< -p alpha_sys
 
 decoupleTwoBin: \
 		output/twoBin/oneAlpha_catUniversal/table_etas.pickle \
@@ -136,28 +136,28 @@ decoupleTwoBin: \
 # box full scan reference
 ATLASCOUNTINGPARAMETERS = alpha_QCDscale_Higgs_ggH2in,alpha_QCDscale_Higgs_ggH,alpha_ATLAS_LUMI_2012
 output/atlas_counting/2p%_box/muTmuW.root: output/atlas_counting/2p%_box.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/4%_box/muTmuW.root: output/atlas_counting/4%_box.root
-	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/lvl%_box/muTmuW.root: output/atlas_counting/lvl%_box.root
-	python Decouple/decouple.py -i $< --range=-0.5,-1.2,2.5,5.2 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< --range=-0.5,-1.2,2.5,5.2 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 # wideGauss full scan
 output/atlas_counting/2p%_wideGauss/muTmuW.root: output/atlas_counting/2p%_wideGauss.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/4%_wideGauss/muTmuW.root: output/atlas_counting/4%_wideGauss.root
-	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 output/atlas_counting/lvl%_wideGauss/muTmuW.root: output/atlas_counting/lvl%_wideGauss.root
-	python Decouple/decouple.py -i $< --range=-0.5,-1.2,2.5,5.2 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< --range=-0.5,-1.2,2.5,5.2 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS) --skip_etas --skip_eff
 
 # no box
 output/atlas_counting/2p%/table_etas.pickle: output/atlas_counting/2p%.root
-	python Decouple/decouple.py -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
+	decouple -i $< --range=0.5,-0.1,3.2,4.0 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
 
 output/atlas_counting/4%/table_etas.pickle: output/atlas_counting/4%.root
-	python Decouple/decouple.py -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS)
+	decouple -i $< --range=-0.3,-3.0,3.6,11.5 --bins=200,400 -p $(ATLASCOUNTINGPARAMETERS)
 
 output/atlas_counting/lvl%/table_etas.pickle: output/atlas_counting/lvl%.root
-	python Decouple/decouple.py -i $< --range=0.0,-0.8,1.7,4.5 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
+	decouple -i $< --range=0.0,-0.8,1.7,4.5 --bins=250,250 -p $(ATLASCOUNTINGPARAMETERS)
 
 
 decoupleAtlasCountingInterpCode0Box: \
@@ -193,51 +193,51 @@ decoupleAtlasCounting: \
 # recouple
 
 output/twoBin/%/muTmuW_profiledContour.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:2                    --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:2                    --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template0.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:2 --template=0       --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:2 --template=0       --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_templateM1.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:2 --template=-1      --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:2 --template=-1      --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template14_etasgeneric_M4.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M4:2         --template=14 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M4:2         --template=14 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template10_etasgeneric_M5.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M5:2         --template=10 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M5:2         --template=10 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template14_etasgeneric_M5.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M5:2         --template=14 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M5:2         --template=14 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template14_etasgeneric_fisherInfo.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_fisherInfo:2 --template=14 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_fisherInfo:2 --template=14 --skip_kVkF --skip_kGlukGamma
 
 
 output/twoBin/%/muTmuW_profiledContour_template10_etasgeneric10_learning.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic10_learning:2   --template=10 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic10_learning:2   --template=10 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template14_etasgeneric14_learning.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic14_learning:2   --template=14 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic14_learning:2   --template=14 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learning.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learning:2   --template=20 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learning:2   --template=20 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template24_etasgeneric24_learning.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic24_learning:2   --template=24 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic24_learning:2   --template=24 --skip_kVkF --skip_kGlukGamma
 
 
 output/twoBin/%/muTmuW_profiledContour_template10_etasgeneric10_learningFull.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic10_learningFull:2   --template=10 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic10_learningFull:2   --template=10 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template14_etasgeneric14_learningFull.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic14_learningFull:2   --template=14 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic14_learningFull:2   --template=14 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learningFull.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learningFull:2   --template=20 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learningFull:2   --template=20 --skip_kVkF --skip_kGlukGamma
 
 output/twoBin/%/muTmuW_profiledContour_template24_etasgeneric24_learningFull.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic24_learningFull:2   --template=24 --skip_kVkF --skip_kGlukGamma
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic24_learningFull:2   --template=24 --skip_kVkF --skip_kGlukGamma
 
 
 
@@ -245,19 +245,19 @@ output/twoBin/%/muTmuW_profiledContour_template24_etasgeneric24_learningFull.roo
 # box full scan reference
 TWOBINPARAMETERS = alpha_sys,alpha_sys_GGF
 output/twoBin/%_box/muTmuW.root: output/twoBin/%_box.root
-	python Decouple/decouple.py -i $< -p $(TWOBINPARAMETERS) --skip_etas --skip_eff
+	decouple -i $< -p $(TWOBINPARAMETERS) --skip_etas --skip_eff
 
 output/twoBin/%/muTmuW_profiledContour_template0_etasfisherInfo_box1.0.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:fisherInfo:2   --template=0 --skip_kVkF --skip_kGlukGamma --box=1
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:fisherInfo:2   --template=0 --skip_kVkF --skip_kGlukGamma --box=1
 
 output/twoBin/%/muTmuW_profiledContour_template10_etasgeneric_M5_box1.0.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M5:2   --template=10 --skip_kVkF --skip_kGlukGamma --box=1
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic_M5:2   --template=10 --skip_kVkF --skip_kGlukGamma --box=1
 
 output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learning_box1.0.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learning:2   --template=20 --skip_kVkF --skip_kGlukGamma --box=1
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learning:2   --template=20 --skip_kVkF --skip_kGlukGamma --box=1
 
 output/twoBin/%/muTmuW_profiledContour_template20_etasgeneric20_learningFull_box1.0.root: output/twoBin/%/muTmuW_eff.root
-	python Decouple/recouple.py -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learningFull:2   --template=20 --skip_kVkF --skip_kGlukGamma --box=1
+	recouple -i $<:profiledNLL:output/twoBin/$*/table_etas.pickle:generic20_learningFull:2   --template=20 --skip_kVkF --skip_kGlukGamma --box=1
 
 
 
@@ -582,137 +582,137 @@ recoupleTwoBin: \
 
 OPTIONS_2PH = --options_muTmuW='--range=0.6,0.5,2.6,3.6 --bins=250,250' --skip_kVkF --skip_kGlukGamma
 output/atlas_counting/2ph/muTmuW_profiledContour.root: output/atlas_counting/2ph/muTmuW_eff.root
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:2 $(OPTIONS_2PH)
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:2 $(OPTIONS_2PH) --template=0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:2 $(OPTIONS_2PH) --template=-1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M4:2 $(OPTIONS_2PH) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M4:2 $(OPTIONS_2PH) --template=14 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=14 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:2 $(OPTIONS_2PH)
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:2 $(OPTIONS_2PH) --template=0
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:2 $(OPTIONS_2PH) --template=-1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M4:2 $(OPTIONS_2PH) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M4:2 $(OPTIONS_2PH) --template=14 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=14 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10 --box=1
 
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10 --box=1
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic14_learning:2 $(OPTIONS_2PH) --template=14
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic14_learning:2 $(OPTIONS_2PH) --template=14 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic24_learning:2 $(OPTIONS_2PH) --template=24
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic24_learning:2 $(OPTIONS_2PH) --template=24 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10 --box=1
+	recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic14_learning:2 $(OPTIONS_2PH) --template=14
+	recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic14_learning:2 $(OPTIONS_2PH) --template=14 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic24_learning:2 $(OPTIONS_2PH) --template=24
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic24_learning:2 $(OPTIONS_2PH) --template=24 --box=1
 
 OPTIONS_4L = --options_muTmuW='--range=0.4,-2.0,3.0,6.2 --bins=100,200' --skip_kVkF --skip_kGlukGamma
 output/atlas_counting/4l/muTmuW_profiledContour.root: output/atlas_counting/4l/muTmuW_eff.root
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:2 $(OPTIONS_4L)
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:2 $(OPTIONS_4L) --template=0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:2 $(OPTIONS_4L) --template=-1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M4:2 $(OPTIONS_4L) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M4:2 $(OPTIONS_4L) --template=14 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=14 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:2 $(OPTIONS_4L)
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:2 $(OPTIONS_4L) --template=0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:2 $(OPTIONS_4L) --template=-1
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M4:2 $(OPTIONS_4L) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M4:2 $(OPTIONS_4L) --template=14 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=14 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10 --box=1.0
 
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic14_learning:2 $(OPTIONS_4L) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic14_learning:2 $(OPTIONS_4L) --template=14 --box=1.0
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic24_learning:2 $(OPTIONS_4L) --template=24
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic24_learning:2 $(OPTIONS_4L) --template=24 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10
+	recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic14_learning:2 $(OPTIONS_4L) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic14_learning:2 $(OPTIONS_4L) --template=14 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20
+	recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic24_learning:2 $(OPTIONS_4L) --template=24
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l/table_etas.pickle:generic24_learning:2 $(OPTIONS_4L) --template=24 --box=1.0
 
 OPTIONS_LVLV = --options_muTmuW='--range=0.0,0.0,1.9,3.8 --bins=160,160' --skip_kVkF --skip_kGlukGamma
 output/atlas_counting/lvlv/muTmuW_profiledContour.root: output/atlas_counting/lvlv/muTmuW_eff.root
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:2 $(OPTIONS_LVLV)
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:2 $(OPTIONS_LVLV) --template=0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:2 $(OPTIONS_LVLV) --template=-1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M4:2 $(OPTIONS_LVLV) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M4:2 $(OPTIONS_LVLV) --template=14 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=14 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:2 $(OPTIONS_LVLV)
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:2 $(OPTIONS_LVLV) --template=0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:2 $(OPTIONS_LVLV) --template=-1
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M4:2 $(OPTIONS_LVLV) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M4:2 $(OPTIONS_LVLV) --template=14 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=14 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10 --box=1.0
 
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic14_learning:2 $(OPTIONS_LVLV) --template=14
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic14_learning:2 $(OPTIONS_LVLV) --template=14 --box=1.0
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic24_learning:2 $(OPTIONS_LVLV) --template=24
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic24_learning:2 $(OPTIONS_LVLV) --template=24 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic14_learning:2 $(OPTIONS_LVLV) --template=14
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic14_learning:2 $(OPTIONS_LVLV) --template=14 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic24_learning:2 $(OPTIONS_LVLV) --template=24
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:generic24_learning:2 $(OPTIONS_LVLV) --template=24 --box=1.0
 
 
 output/atlas_counting/2ph_interpCode0/muTmuW_profiledContour.root: output/atlas_counting/2ph_interpCode0/muTmuW_eff.root
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:fisherInfo:2 $(OPTIONS_2PH) --template=0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10 --wideGauss=1.3
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:fisherInfo:2 $(OPTIONS_2PH) --template=0
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_2PH) --template=10 --wideGauss=1.3
 
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_2PH) --template=10 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20
+	# recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_2PH) --template=20 --box=1
 
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_2PH) --template=10
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_2PH) --template=10 --box=1
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_2PH) --template=20
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_2PH) --template=20 --box=1
+	recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_2PH) --template=10
+	recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_2PH) --template=10 --box=1
+	recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_2PH) --template=20
+	recouple -i $<:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_2PH) --template=20 --box=1
 
 output/atlas_counting/4l_interpCode0/muTmuW_profiledContour.root: output/atlas_counting/4l_interpCode0/muTmuW_eff.root
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:fisherInfo:2 $(OPTIONS_4L) --template=0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10 --wideGauss=1.3
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:fisherInfo:2 $(OPTIONS_4L) --template=0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_4L) --template=10 --wideGauss=1.3
 
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_4L) --template=10 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20
+	# recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_4L) --template=20 --box=1.0
 
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_4L) --template=10
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_4L) --template=10 --box=1.0
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_4L) --template=20
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_4L) --template=20 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_4L) --template=10
+	recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_4L) --template=10 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_4L) --template=20
+	recouple -i $<:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_4L) --template=20 --box=1.0
 
 output/atlas_counting/lvlv_interpCode0/muTmuW_profiledContour.root: output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:fisherInfo:2 $(OPTIONS_LVLV) --template=0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10 --box=1
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10 --wideGauss=1.3
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:fisherInfo:2 $(OPTIONS_LVLV) --template=0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10 --box=1
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2 $(OPTIONS_LVLV) --template=10 --wideGauss=1.3
 
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10 --box=1.0
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20
-	# python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learning:2 $(OPTIONS_LVLV) --template=10 --box=1.0
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20
+	# recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learning:2 $(OPTIONS_LVLV) --template=20 --box=1.0
 
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_LVLV) --template=10
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_LVLV) --template=10 --box=1.0
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_LVLV) --template=20
-	python Decouple/recouple.py -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_LVLV) --template=20 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_LVLV) --template=10
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic10_learningFull:2 $(OPTIONS_LVLV) --template=10 --box=1.0
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_LVLV) --template=20
+	recouple -i $<:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic20_learningFull:2 $(OPTIONS_LVLV) --template=20 --box=1.0
 
 
 # shifted contour: place holder is variable
 shiftedAtlasCounting: output/atlas_counting/2ph/muTmuW_eff.root output/atlas_counting/4l/muTmuW_eff.root output/atlas_counting/lvlv/muTmuW_eff.root
-	python Decouple/src/muTmuW.py -i output/atlas_counting/2ph/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
-	python Decouple/src/muTmuW.py -i output/atlas_counting/2ph/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
+	recouple_mutmuw -i output/atlas_counting/2ph/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
+	recouple_mutmuw -i output/atlas_counting/2ph/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
 
-	python Decouple/src/muTmuW.py -i output/atlas_counting/4l/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=100,200 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
-	python Decouple/src/muTmuW.py -i output/atlas_counting/4l/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=100,200 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
+	recouple_mutmuw -i output/atlas_counting/4l/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=100,200 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
+	recouple_mutmuw -i output/atlas_counting/4l/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=100,200 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
 
-	python Decouple/src/muTmuW.py -i output/atlas_counting/lvlv/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=160,160 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
-	python Decouple/src/muTmuW.py -i output/atlas_counting/lvlv/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=160,160 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
+	recouple_mutmuw -i output/atlas_counting/lvlv/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=160,160 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
+	recouple_mutmuw -i output/atlas_counting/lvlv/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=160,160 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
 
 shiftedAtlasCountingInterpCode0: output/atlas_counting/2ph_interpCode0/muTmuW_eff.root output/atlas_counting/4l_interpCode0/muTmuW_eff.root output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root
-	python Decouple/src/muTmuW.py -i output/atlas_counting/2ph_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph_interpCode0/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
-	python Decouple/src/muTmuW.py -i output/atlas_counting/2ph_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph_interpCode0/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
+	recouple_mutmuw -i output/atlas_counting/2ph_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph_interpCode0/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
+	recouple_mutmuw -i output/atlas_counting/2ph_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/2ph_interpCode0/muTmuW_eff.root --template=0 --range=0.6,0.5,2.6,3.6 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
 
-	python Decouple/src/muTmuW.py -i output/atlas_counting/4l_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l_interpCode0/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=200,400 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
-	python Decouple/src/muTmuW.py -i output/atlas_counting/4l_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l_interpCode0/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=200,400 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
+	recouple_mutmuw -i output/atlas_counting/4l_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l_interpCode0/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=200,400 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
+	recouple_mutmuw -i output/atlas_counting/4l_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/4l_interpCode0/muTmuW_eff.root --template=0 --range=0.4,-2.0,3.0,6.2 --bins=200,400 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
 
-	python Decouple/src/muTmuW.py -i output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
-	python Decouple/src/muTmuW.py -i output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
+	recouple_mutmuw -i output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=0.0
+	recouple_mutmuw -i output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:fisherInfo:2 -o output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root --template=0 --range=0.0,0.0,1.9,3.8 --bins=250,250 --setParameter=alpha_QCDscale_Higgs_ggH=1.0
 
 
 COMBINPUT  = output/atlas_counting/2ph/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph/table_etas.pickle:generic20_learning:2
@@ -721,8 +721,8 @@ COMBINPUT += output/atlas_counting/lvlv/muTmuW_eff.root:profiledNLL:output/atlas
 OPTIONS_COMB = --skip_muTmuW --options_kVkF='--range=0.65,-1.7,1.5,2.0 --bins=200,200' --options_kGlukGamma='--range=0.6,0.4,1.8,1.6 --bins=200,200'
 output/atlas_counting/2ph_4l_lvlv/kVkF_profiledContour.root: output/atlas_counting/2ph/muTmuW_eff.root output/atlas_counting/4l/muTmuW_eff.root output/atlas_counting/lvlv/muTmuW_eff.root
 	@echo "For combination, using as input: "+$(COMBINPUT)
-	python Decouple/recouple.py -i "$(COMBINPUT)" -o output/atlas_counting/2ph_4l_lvlv/ $(OPTIONS_COMB) --template=20
-	python Decouple/recouple.py -i "$(COMBINPUT)" -o output/atlas_counting/2ph_4l_lvlv/ $(OPTIONS_COMB) --template=20 --box=1.0
+	recouple -i "$(COMBINPUT)" -o output/atlas_counting/2ph_4l_lvlv/ $(OPTIONS_COMB) --template=20
+	recouple -i "$(COMBINPUT)" -o output/atlas_counting/2ph_4l_lvlv/ $(OPTIONS_COMB) --template=20 --box=1.0
 
 COMBINPUT_INTERPCODE0  = output/atlas_counting/2ph_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/2ph_interpCode0/table_etas.pickle:generic20_learning:2
 COMBINPUT_INTERPCODE0 += output/atlas_counting/4l_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/4l_interpCode0/table_etas.pickle:generic20_learning:2
@@ -741,23 +741,23 @@ COMBINPUT_INTERPCODE0M5 += output/atlas_counting/4l_interpCode0/muTmuW_eff.root:
 COMBINPUT_INTERPCODE0M5 += output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root:profiledNLL:output/atlas_counting/lvlv_interpCode0/table_etas.pickle:generic_M5:2
 output/atlas_counting/2ph_4l_lvlv_interpCode0/kVkF_profiledContour.root: output/atlas_counting/2ph_interpCode0/muTmuW_eff.root output/atlas_counting/4l_interpCode0/muTmuW_eff.root output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root
 	# @echo "For combination, using as input: "+$(COMBINPUT_INTERPCODE0)
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20 --box=1.0
+	# recouple -i "$(COMBINPUT_INTERPCODE0)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20
+	# recouple -i "$(COMBINPUT_INTERPCODE0)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20 --box=1.0
 	# @echo "For combination, using as input: "+$(COMBINPUT_INTERPCODE0T10)
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0T10)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0T10)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --box=1.0
+	# recouple -i "$(COMBINPUT_INTERPCODE0T10)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10
+	# recouple -i "$(COMBINPUT_INTERPCODE0T10)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --box=1.0
 	@echo "For combination, using as input: "+$(COMBINPUT_INTERPCODE0FULL)
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20 --box=1.0
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20 --wideGauss=1.3
+	recouple -i "$(COMBINPUT_INTERPCODE0FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20
+	recouple -i "$(COMBINPUT_INTERPCODE0FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20 --box=1.0
+	recouple -i "$(COMBINPUT_INTERPCODE0FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20 --wideGauss=1.3
 	@echo "For combination, using as input: "+$(COMBINPUT_INTERPCODE0T10FULL)
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0T10FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0T10FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --box=1.0
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0T10FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --wideGauss=1.3
+	recouple -i "$(COMBINPUT_INTERPCODE0T10FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10
+	recouple -i "$(COMBINPUT_INTERPCODE0T10FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --box=1.0
+	recouple -i "$(COMBINPUT_INTERPCODE0T10FULL)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --wideGauss=1.3
 	# @echo "For combination, using as input: "+$(COMBINPUT_INTERPCODE0M5)
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0M5)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0M5)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --box=1.0
-	# python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0M5)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --wideGauss=1.3
+	# recouple -i "$(COMBINPUT_INTERPCODE0M5)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10
+	# recouple -i "$(COMBINPUT_INTERPCODE0M5)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --box=1.0
+	# recouple -i "$(COMBINPUT_INTERPCODE0M5)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=10 --wideGauss=1.3
 
 
 COMBINPUT_INTERPCODE0_NAIVE  = output/atlas_counting/2ph_interpCode0/muTmuW.root:profiledNLL:None:None:2
@@ -765,29 +765,29 @@ COMBINPUT_INTERPCODE0_NAIVE += output/atlas_counting/4l_interpCode0/muTmuW.root:
 COMBINPUT_INTERPCODE0_NAIVE += output/atlas_counting/lvlv_interpCode0/muTmuW.root:profiledNLL:None:None:2
 output/atlas_counting/2ph_4l_lvlv_interpCode0_naive/kVkF_profiledContour.root: output/atlas_counting/2ph_interpCode0/muTmuW_eff.root output/atlas_counting/4l_interpCode0/muTmuW_eff.root output/atlas_counting/lvlv_interpCode0/muTmuW_eff.root
 	@echo "For combination, using as input: "+$(COMBINPUT_INTERPCODE0_NAIVE)
-	python Decouple/recouple.py -i "$(COMBINPUT_INTERPCODE0_NAIVE)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20
+	recouple -i "$(COMBINPUT_INTERPCODE0_NAIVE)" -o output/atlas_counting/2ph_4l_lvlv_interpCode0/ $(OPTIONS_COMB) --template=20
 
 
 
 output/atlas_counting/2ph_4l_lvlv%/kVkF.root: output/atlas_counting/comb%.root
 	@echo "\n=== Doing a box constraint fullCountingModelScan for kVkF"
 	mkdir -p output/atlas_counting/2ph_4l_lvlv$*/
-	python Decouple/src/fullCountingModelScan_kVkF.py -i $< -o $@
+	python Decouple/fullCountingModelScan_kVkF.py -i $< -o $@
 
 output/atlas_counting/2ph_4l_lvlv%/kGlukGamma.root: output/atlas_counting/comb%.root
 	@echo "\n=== Doing a box constraint fullCountingModelScan for kGlukGamma"
 	mkdir -p output/atlas_counting/2ph_4l_lvlv$*/
-	python Decouple/src/fullCountingModelScan_kGlukGamma.py -i $< -o $@
+	python Decouple/fullCountingModelScan_kGlukGamma.py -i $< -o $@
 
 output/atlas_counting/2ph_4l_lvlv/kVkF.root: output/atlas_counting/comb.root
 	@echo "\n=== Doing a fullCountingModelScan for kVkF"
 	mkdir -p output/atlas_counting/2ph_4l_lvlv/
-	python Decouple/src/fullCountingModelScan_kVkF.py -i $< -o $@
+	python Decouple/fullCountingModelScan_kVkF.py -i $< -o $@
 
 output/atlas_counting/2ph_4l_lvlv/kGlukGamma.root: output/atlas_counting/comb.root
 	@echo "\n=== Doing a fullCountingModelScan for kGlukGamma"
 	mkdir -p output/atlas_counting/2ph_4l_lvlv/
-	python Decouple/src/fullCountingModelScan_kGlukGamma.py -i $< -o $@
+	python Decouple/fullCountingModelScan_kGlukGamma.py -i $< -o $@
 
 
 recoupleAtlasCountingInterpCode0Channels: \

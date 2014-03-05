@@ -1,0 +1,9 @@
+git+https://github.com/svenkreiss/BatchLikelihoodScan.git@v1.0.4
+git+https://github.com/svenkreiss/LHCHiggsCouplings.git@v1.0
+git+https://github.com/svenkreiss/PyROOTUtils.git@v1.0.1
+multiprocessing==2.6.2.1
+numpy==1.8.0
+progressbar==2.2
+scipy==0.13.3
+
+.

@@ -7,18 +7,20 @@ A demo for the recoupling stage where the effective likelihood and template para
 
 # Install
 
-Create a `virtualenv` (which usually comes with your python environment or can be insalled) and install this package with pip:
+Clone the repository. Then create a `virtualenv` (which usually comes with your python environment or can be insalled) and install this package and all requirements with pip:
 
 ```
 virtualenv venv
 source venv/bin/activate
-pip install git+https://github.com/svenkreiss/decouple.git
+pip install -r requirements.txt
 ```
+
+For development and to use the latest versions of all dependencies, use `requirements_dev.txt`.
 
 
 # Running on any model
 
-You can create your own model and run `decouple.py` and `recouple.py` on them. `decouple.py` takes root files with a RooWorkspace, containing the model as input and produces the effective Likelihood and eta files. `recouple.py` takes eta files and effective Likelihoods (also from multiple channels to do a combination) and produces coupling results.
+You can create your own model and run `decouple` and `recouple` on them. `decouple` takes root files with a RooWorkspace, containing the model as input and produces the effective Likelihood and eta files. `recouple` takes eta files and effective Likelihoods (also from multiple channels to do a combination) and produces coupling results.
 
 Example models are in the module ModelGenerators.
 
