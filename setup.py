@@ -2,8 +2,8 @@ from distutils.core import setup
  
 setup(
     name='Decouple',
-    version='1.2.1',
-    packages=['Decouple', 'Decouple.BatchPlugins'],
+    version='1.2.2',
+    packages=['Decouple', 'Decouple.BatchPlugins', 'scripts'],
     license='LICENSE',
     description='Decouple and recouple.',
     long_description=open('README.md').read(),
