@@ -54,3 +54,16 @@ This package depends on a few related Python packages that are generally useful.
 * [LHCHiggsCouplings](http://github.com/svenkreiss/LHCHiggsCouplings): Interface to cross sections and branching ratios published by the LHC Higgs Cross Section Working Group with interpolation in Higgs mass.
 * [BatchLikelihoodScan](http://github.com/svenkreiss/BatchLikelihoodScan): Powerful tool for likelihood scans and easily runs on batch clusters.
 * [PyROOTUtils](http://github.com/svenkreiss/PyROOTUtils): Collection of useful tools for working with TGraphs and generally plotting with ROOT.
+
+
+# Attribution
+
+Please cite `K. Cranmer, S. Kreiss, D. Lopez-Val and T. Plehn (2014) <http://arxiv.org/abs/1401.0080>` if you find this code useful in your research.
+
+
+# License
+
+Copyright 2013-2014 Sven Kreiss, Kyle Cranmer
+
+`decouple` is free software made available under the MIT License. For details see
+the [LICENSE](LICENSE) file.
